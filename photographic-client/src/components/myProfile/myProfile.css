@@ -1,0 +1,462 @@
+.home-con {
+    display: flex;
+
+}
+
+.home-main {
+    max-height: 100vh;
+    overflow: hidden;
+}
+
+
+
+
+
+
+
+.sidebar-con {
+
+    flex: .2;
+
+}
+
+.sidebar {
+    border: 1px solid #e7e7e7;
+    height: 100vh;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: baseline;
+    max-width: 90%;
+}
+
+.sidebar-logo {
+    width: 65%;
+    padding: 10px;
+    margin: 5px 5px 10px 0px;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.sidebar-nav-link {
+    color: black;
+    font-size: .9rem;
+    font-weight: 600;
+    margin-left: 5px;
+}
+
+
+/* card designs */
+.profile{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-right: 5%;
+    max-height: 100vh;
+    /* Set a maximum height for the .all-cards container */
+}
+
+.card-header {
+    display: flex;
+    padding: 10px;
+}
+
+.card-dp {
+    border-radius: 50%;
+    height: 45px;
+    margin-right: 10px;
+
+
+}
+
+.card-poster {
+    font-weight: 550;
+}
+
+
+.card-image {
+    width: 100%;
+}
+
+.card-image>img {
+    width: 100%;
+
+}
+
+.card-image>iframe {
+    width: 100%;
+}
+
+
+.card-react {
+    display: flex;
+    padding: 0px 5px;
+}
+
+.like {
+    margin: 3px;
+}
+
+.like-count {
+    font-size: .8rem;
+    font-weight: 700;
+    margin: -7px;
+}
+
+.comment-count {
+    font-size: .8rem;
+    font-weight: 700;
+    margin: -7px;
+}
+
+.card-description {
+    padding-right: 10px;
+    padding-left: 5px;
+    text-align: left;
+    border-bottom: 1.5px solid #e7e7e7;
+
+}
+
+.time-stamp {
+    font-size: .8rem;
+    color: #c5c4c4;
+    font-weight: 380;
+}
+
+.card-comment {
+    display: flex;
+    padding: 10px;
+}
+
+.smile-icon {
+    padding-right: 10px;
+}
+
+.card-comment>input {
+    border: none;
+    width: 100%;
+
+}
+
+.card-comment>button {
+    background-color: white;
+    border: none;
+    color: #9ccae9;
+    display: block;
+    margin-left: 10px;
+    font-size: 1.005rem;
+
+}
+
+.card-comment>button:hover {
+    color: #4caae9;
+    cursor: pointer;
+}
+
+.comment-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(16, 13, 13, 0.788);
+    z-index: 9000;
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.c-modal-container {
+    position: inherit;
+    transform: translate(-50%, -50%);
+    display: flex;
+    width: 80%;
+    height: 80%;
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+.c-modal-photo {
+    flex: .5;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.c-modal-photo img {
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.c-modal-detail {
+    flex: .5;
+    width: 100%;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.all-comments {
+
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.comment-item {
+    display: flex;
+    padding: 10px;
+    text-align: start;
+}
+
+.comment-item p {
+    margin-left: -12.5px;
+}
+
+.commenter {
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.comment-text {
+    font-weight: 500;
+    font-size: .85rem;
+}
+
+
+.c-modal-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    /* Align items at the bottom */
+}
+
+.close-modal {
+    padding: 5px;
+    position: absolute;
+    top: 3%;
+    right: 5%;
+}
+
+
+
+/*  profile */
+.profile-main {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+}
+
+.profile-pic {
+    display: flex;
+    flex: .4;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.profile-pic-frame {
+    background-color: #e7e7e7;
+    border: 4px solid rgba(108, 108, 235, 0.795);
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.my-photo {
+    max-width: 100%;
+    max-width: 100%;
+
+
+}
+
+.profile-details {
+    flex: .6;
+}
+
+.profile-info {
+    display: flex;
+    font-weight: 500;
+    gap: 15px;
+}
+
+.profile-name {
+    text-align: start;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.profile-email {
+    text-align: start;
+    font-weight: 250;
+    font-size: 1.2rem;
+}
+
+.info-text {
+    font-weight: 300;
+}
+
+.edit-profile {
+    float: left;
+    border: 0;
+    background-color: #efefef;
+    width: 200px;
+    height: 35px;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.edit-profile:hover {
+    background-color: #b4b3b3;
+    cursor: pointer;
+}
+
+.profile-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    padding: 5px;
+}
+
+.profile-gallery img {
+    width: 100%;
+    height: auto;
+}
+.invisible-space{
+    color: white;
+    height: 300px;
+    width: 30px;
+    display: none;
+}
+.delete-post{
+    z-index: 10000;
+    position: fixed;
+    bottom: 5%;
+    left: 5%;
+
+}
+
+@media only screen and (max-width: 950px) {
+    .sidebar-con {
+        display: none;
+    }
+
+    .profile{
+        flex: 1;
+        margin-top: 65px;
+        margin-bottom: 80px;
+        margin-right: 0px;
+    }
+
+    .close-modal {
+
+        top: 0;
+        right: 0;
+    }
+
+    .profile-pic-frame {
+
+        height: 150px;
+        width: 150px;
+
+    } 
+       .delete-post{
+        bottom: 2%;
+        left: 2%;
+    
+    }
+
+    .invisible-space{
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+
+    .profile{
+
+        flex: 1;
+        margin-bottom: 200px;
+    }
+
+    .c-modal-photo {
+        display: none;
+    }
+
+    .c-modal-detail {
+        flex: 1;
+    }
+
+    .close-modal {
+
+        top: 0;
+        right: 0;
+    }
+
+    .profile-pic-frame {
+
+        height: 70px;
+        width: 70px;
+
+    }
+
+    .profile-info {
+        font-weight: 500;
+    }
+
+    .profile-name {
+        font-weight: 600;
+        font-size: .9rem;
+    }
+
+    .profile-email {
+        font-weight: 250;
+        font-size: 1rem;
+    }
+
+    .info-text {
+        font-size: .8rem;
+        font-weight: 300;
+    }
+
+    .edit-profile {
+        width: 150px;
+        height: 30px;
+        border-radius: 5px;
+        font-size: .9rem;
+    }
+
+    .profile-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 5px;
+        padding: 2px;
+    }
+
+    .invisible-space{
+        display: block;
+    }
+    .delete-post{
+        bottom: 2%;
+        left: 2%;
+    
+    }
+
+}

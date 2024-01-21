@@ -1,0 +1,62 @@
+.newUser{
+padding:  10px 30px ;
+border: 1px solid #dbdbdb;
+width: 300px;
+margin-top: 5%;
+}
+#toggle-newUser{
+    color: #4bb4f8;
+}
+#toggle-newUser:hover{
+    color: #3da2e6;
+}
+.authenticate-con {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Adjust as needed */
+  }
+
+
+.auth-logo{
+    padding: 20px;
+    scale: .8;
+}
+
+.login-con{
+    padding: 30px;
+border: 1px solid #dbdbdb;
+width: 300px;
+}
+
+
+.input-field{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.login-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4bb4f8;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .login-button:hover{
+    
+    background-color: #37a6f0;
+
+  }
+
+#sign-up-text{
+    color: #737373;
+    font-weight: 700;
+    padding: 4px;
+}

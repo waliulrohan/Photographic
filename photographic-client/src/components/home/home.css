@@ -1,0 +1,334 @@
+.home-con{
+    display: flex;
+ 
+}
+.home-main{
+    max-height: 100vh;
+overflow: hidden;
+}
+
+
+
+
+
+
+
+.sidebar-con{
+
+    flex: .2;
+
+}
+
+.sidebar{
+    border: 1px solid #e7e7e7;
+    height: 100vh;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: baseline;
+    max-width: 90%;
+}
+.sidebar-logo{
+   width: 65%;
+   padding: 10px;
+   margin: 5px 5px 10px 0px;
+}
+.sidebar-nav{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.sidebar-nav-link{
+    color: black;
+    font-size: .9rem;
+    font-weight: 600;
+    margin-left: 5px;
+}
+.profile-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    gap: 3px;
+
+    border-radius: 70%;
+}
+.profile-btn:hover{
+        background-color: rgba(223, 223, 223, 0.56);
+}
+.profile-btn p {
+
+
+    font-size: .9rem;
+    font-weight: 600;
+    float: left;
+    display: flex;
+}
+.profile-btn-image{
+    width: 20%;
+
+}
+.profile-btn-image img{
+    border-radius: 50%;
+    max-height: 45%;
+    max-width: 45%;
+}
+
+
+/* card designs */
+.all-cards{
+ flex: .4;
+ display: flex;
+ flex-direction: column;
+ overflow-y: auto;
+ max-height: 100vh;
+}
+.card-con{
+
+    border: 1px solid #e7e7e7;
+    border-radius: 6px;
+    margin: 25px 25px 10px 25px;
+    max-width: 95%;
+    height: fit-content;
+}
+.card-header{
+    display: flex;
+    padding: 10px;
+}
+.card-dp{
+
+    border-radius: 50%;
+    max-height: 45px;
+    max-width: 45px;
+    
+    margin-right: 10px;
+  
+
+}
+.card-poster{
+  font-weight: 550;
+}
+
+
+.card-image{
+    width: 100%;
+}
+
+.card-image > img{
+    width: 100%;
+   
+}
+.card-image > iframe{
+    width: 100%;
+}
+
+
+.card-react{
+    display: flex;
+    padding: 0px 5px;
+}
+.like{
+margin: 3px;
+}
+.like-count{
+    font-size: .8rem;
+    font-weight: 700;
+    margin: -7px;
+}
+
+.comment-count{
+    font-size: .8rem;
+    font-weight: 700;
+    margin: -7px;
+}
+
+.card-description{
+    padding-right: 10px;
+    padding-left: 5px;
+    text-align: left;
+    border-bottom: 1.5px solid #e7e7e7;
+
+}
+.time-stamp{
+    font-size: .8rem;
+    color: #c5c4c4;
+    font-weight: 380;
+}
+.card-comment{
+    display: flex;
+    padding: 10px;
+
+}
+.smile-icon{
+    padding-right: 10px;
+}
+.card-comment > input{
+    border: none;
+    width: 100%;
+
+}
+.card-comment > button{
+    background-color: white;
+    border: none;
+    color: #9ccae9;
+    display: block;
+    margin-left: 10px;
+    font-size: 1.005rem;
+
+}
+.card-comment > button:hover{
+    color: #4caae9;
+    cursor: pointer;
+}
+
+.comment-modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(16, 13, 13, 0.788);
+    z-index: 9000;
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+}
+.c-modal-container{
+    position: inherit;
+    transform: translate(-50%, -50%);
+    display: flex;
+    width: 80%;
+    height: 80%;
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    justify-content: center;
+    align-items: center;
+}
+.c-modal-photo{
+    flex: .5;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.c-modal-photo img{
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+}
+.c-modal-detail{
+    flex: .5;
+    width: 100%;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.all-comments{
+
+    height: 300px;
+    overflow-y:scroll ;
+}
+.comment-item{
+    display: flex;
+    padding: 10px;
+    text-align: start;
+    gap: 3px;
+}
+.comment-item p {
+    margin-left: -12.5px;
+}
+.commenter{
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+.comment-text{
+    font-weight: 500;
+    font-size: .85rem;
+}
+
+
+.c-modal-description{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Align items at the bottom */
+}
+.close-modal{
+    padding: 5px;
+    position: absolute;
+    top: 3%;
+    right: 5%;
+}
+
+.right-con{
+    flex: .4;
+}
+
+.invisible-space{
+    color: white;
+    height: 300px;
+    width: 30px;
+    display: none;
+}
+
+@media only screen and (max-width: 950px) {
+.sidebar-con{
+    display: none;
+}
+
+.all-cards{
+    flex: .6;
+    margin-top: 50px;
+}
+.right-con{
+   flex: .4;
+   margin-top: 50px;
+}
+.close-modal{
+
+    top: 0;
+    right: 0;
+}
+.invisible-space{
+    display: block;
+}
+}
+
+@media only screen and (max-width: 600px) {
+
+    .right-con{
+      display: none;
+      
+    }
+    .all-cards{
+   margin-top: 60px;
+   flex: 1;
+    }
+    .c-modal-photo{
+       display: none;
+    }
+    .c-modal-detail{
+        flex: 1;
+    }
+    .close-modal{
+
+        top: 0;
+        right: 0;
+    }
+    .card-con{
+        margin: 0px 0px 10px 0px;
+        border-radius: 0;
+        border-top:1px solid #e7e7e7 ;
+        border-bottom: 1px solid #e7e7e7 ;
+        max-width: 100%;
+        height: fit-content;
+    }
+
+}
+    

@@ -1,0 +1,43 @@
+.navbar-con{
+    height: 20%;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px;
+    border: 1.5px solid #e7e7e7;
+    display: none;
+    align-items: center; /* Add this line to vertically center content */
+    padding: 10px;
+    border: 1.5px solid #e7e7e7;
+    position: fixed; /* Add this line */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    z-index: 1000;
+    height: auto;
+}
+.navbar-search{
+    border: 1.5px solid #ebebeb;
+    text-align: center;
+    height: 25px;
+    font-size: 1rem;
+    margin: auto 0px;
+     width: 200px;
+
+}
+.navbar-logo{
+    width: auto;
+    height: 30px;
+
+}
+.navbar-spacer{
+flex: .4;
+}
+
+
+@media only screen and (max-width: 950px) {
+.navbar-con{
+    display: block;
+    display: flex;
+}
+    }

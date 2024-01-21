@@ -1,0 +1,56 @@
+.profile-modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000000;
+    background: rgba(255, 255, 255, 0.9);
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: center;
+    -ms-align-items: center;
+    align-items: center;
+    opacity: 0;
+    -webkit-animation: react-confirm-alert-fadeIn 0.2s 0.2s forwards;
+    -moz-animation: react-confirm-alert-fadeIn 0.2s 0.2s forwards;
+    -o-animation: react-confirm-alert-fadeIn 0.2s 0.2s forwards;
+    animation: react-confirm-alert-fadeIn 0.2s 0.2s forwards;
+}
+
+.profile-modal-main{
+        width: 300px;
+        height: fit-content;
+    text-align: left;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 20px 75px rgba(0, 0, 0, 0.13);
+    color: #414141;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.profile-modal-button{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.profile-modal-button p{
+   padding: 20px;
+}
+
+
+.profile-modal-button:hover{
+    background-color: rgba(235, 234, 236, 0.445);
+    color: #000000; 
+    font-size: 1.05rem;
+}
+
+/* https://res.cloudinary.com/dlaikb0id/image/upload/v1705229649/noProfile_cy0wyc.png */
