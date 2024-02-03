@@ -57,10 +57,10 @@ const PostModal = () => {
                 fetch('http://localhost:5000/post/createPost', {
                     method: 'POST',
                     headers: {
+                        'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        token,
                         caption,
                         photo: imageUrl,
                     }),

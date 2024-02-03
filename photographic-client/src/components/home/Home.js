@@ -8,6 +8,7 @@ import { CreateModal } from '../../App';
 import CardSkeletons from '../loadingSkeletons/CardSkeletons';
 import ClockLoader from 'react-spinners/ClockLoader'
 
+
 const Home = () => {
   const { allPosts, setAllPosts } = useContext(CreateModal);
   const [allCardsDiv, setAllCardsDiv] = useState(null);
@@ -35,9 +36,12 @@ const Home = () => {
       skip = skip + 3;
       fetchPosts();
     }
+    console.log('scrolled triggerd');
   };
 
   useEffect(() => {
+    console.log('scrolled triggerd');
+    setAllPosts([])
     setAllCardsDiv(document.getElementById('all-cards'));
   }, []);
 
@@ -55,6 +59,13 @@ const Home = () => {
   }, [allCardsDiv]);
 
 
+  const fakeStories = [
+    { photo: 'https://yt3.ggpht.com/bcnSPX2PVmGdp_u0_3N2_L2nLXojM9HFyzbcg9UGPv3l9B9TZSDsDQvFoOM3Mnbz9M4xM_Oa8Is=s48-c-k-c0x00ffffff-no-rj' },
+    { photo: 'https://thumbs.dreamstime.com/b/handsome-guy-being-bored-talking-stranger-random-staff-yawning-cover-opened-mouth-fist-squinting-tired-standing-fatigue-178777560.jpg' },
+    { photo: 'https://res.cloudinary.com/dlaikb0id/image/upload/v1705915715/fotor-ai-20231226222744_jnchnr.jpg' },
+    { photo: 'https://res.cloudinary.com/dlaikb0id/image/upload/v1705917126/Cropped_Image_1000_ab9gql.webp' },   
+    { photo: 'https://res.cloudinary.com/dlaikb0id/image/upload/v1706182498/Screen_Shot_2023-10-28_at_11.55.00_vxoujl.png' },
+  ];
 
   return (
     <div className='home-main'>
@@ -84,7 +95,7 @@ const Home = () => {
         </div>
       }
 
-        <Right />
+        <Right stories={fakeStories}/>
       </div>
     </div>
   );

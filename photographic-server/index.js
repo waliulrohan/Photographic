@@ -14,6 +14,9 @@ dotenv.config();
 const userRoute = require("./routes/userRoute");
 const authRoute = require("./routes/authRoute")
 const postRoute = require("./routes/postRoute")
+const storyRoute = require("./routes/storyRoute")
+
+
 const { notFoundHandler, errorHandler } = require('./middleweres/common/errorHandler');
 
 const connectDb = async () => {
@@ -36,7 +39,7 @@ const connectDb = async () => {
 app.use("/user", userRoute)
 app.use("/auth", authRoute)
 app.use("/post", postRoute)
-
+app.use("/story",storyRoute)
 
 //404 not fount error
 app.use(notFoundHandler)

@@ -8,7 +8,7 @@
     align-items: center; /* Add this line to vertically center content */
     padding: 10px;
     border: 1.5px solid #e7e7e7;
-    position: fixed; /* Add this line */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -30,6 +30,9 @@
     height: 30px;
 
 }
+.story-button{
+    display: none;
+ }
 .navbar-spacer{
 flex: .4;
 }
@@ -41,3 +44,11 @@ flex: .4;
     display: flex;
 }
     }
+    @media only screen and (max-width: 600px) {
+
+ .story-button{
+    display: block;
+ }
+    }
+        
+    

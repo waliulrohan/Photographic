@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import logo from '../../images/photographicLogo.png'
 import './navbar.css'
 import Drawer from 'react-modern-drawer'
@@ -13,96 +13,108 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { CreateModal } from '../../App';
 import { useNavigate } from 'react-router-dom';
 
+import CropOriginalIcon from '@mui/icons-material/CropOriginal';
+import AddPhotoAlternateTwoToneIcon from '@mui/icons-material/AddPhotoAlternateTwoTone';
+import Diversity1Icon from '@mui/icons-material/Diversity1';
 const Navbar = () => {
   const navigate = useNavigate();
-    const { modalIsOpen, setModalIsOpen } = useContext(CreateModal); 
-       const [isOpen, setIsOpen] = React.useState(false)
-    const toggleDrawer = () => {
-        setIsOpen((prevState) => !prevState)
-    }
-    const [myDp,setMyDp]=useState('')
-useEffect(()=>{
-  setMyDp(sessionStorage.getItem("myDp"))
-},[])
+  const { modalIsOpen, setModalIsOpen } = useContext(CreateModal);
+  const [isOpen, setIsOpen] = React.useState(false)
+  const toggleDrawer = () => {
+    setIsOpen((prevState) => !prevState)
+  }
+  const [myDp, setMyDp] = useState('')
+  useEffect(() => {
+    setMyDp(sessionStorage.getItem("myDp"))
+  }, [])
 
-    // functions for modal 
-    const openModal = () => {
-        setModalIsOpen(true);
-      };
-      
-      const closeModal = () => {
-        setModalIsOpen(false);
-      };
+  // functions for modal 
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
 
-    return (
-        <div className='navbar-con'>
-            <img src={logo} alt="" className="navbar-logo" onClick={()=> navigate("/")} style={{cursor:'pointer'}} />
-            <div className="navbar-spacer"></div>
-            <div className="navbar-icon">
-            <IconButton onClick={()=> toggleDrawer()}>
-                     <MoreVertOutlined  style={{ color: 'black'}}  />
-                  </IconButton>
-            </div>
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
 
-            <Drawer
-                open={isOpen}
-                onClose={toggleDrawer}
-                direction='left'
-                className='bla bla bla'
-            >
-                <div className='navbar-drawer'>
-                    
-            <div className="sidebar" style={{border:"0px"}}>
-               <img src={logo} alt="logo...." className="sidebar-logo" onClick={()=> navigate("/")} style={{cursor:'pointer'}} />
-                <div className="sidebar-nav">
-                  <IconButton  onClick={()=>{
-                    setIsOpen(false)
-                    navigate('/home')
-                }}>
-                      <HomeIcon  style={{ color: 'black'}}  /> <span className='sidebar-nav-link'>Home</span>
-                  </IconButton > 
+  return (
+    <div className='navbar-con'>
+      <img src={logo} alt="" className="navbar-logo" onClick={() => navigate("/")} style={{ cursor: 'pointer' }} />
+      <div className="navbar-spacer"></div>
+      <div className="navbar-icon">
+        <IconButton onClick={() => toggleDrawer()}>
+          <MoreVertOutlined style={{ color: 'black' }} />
+        </IconButton>
+      </div>
 
-                  <IconButton  onClick={()=>{
-                    setIsOpen(false)
-                }}>
-                     <SearchIcon style={{ color: 'black'}}   /> <span className='sidebar-nav-link'>Search</span>
-                  </IconButton>
+      <Drawer
+        open={isOpen}
+        onClose={toggleDrawer}
+        direction='left'
+        className='bla bla bla'
+      >
+        <div className='navbar-drawer'>
 
-                  <IconButton onClick={()=>{
-                    openModal();
-                    setIsOpen(false)
-                }}>
-                     <AddCircleOutlineIcon  style={{ color: 'black'}}  /> <span className='sidebar-nav-link'>Create</span>
-                  </IconButton>
+          <div className="sidebar" style={{ border: "0px" }}>
+            <img src={logo} alt="logo...." className="sidebar-logo" onClick={() => navigate("/")} style={{ cursor: 'pointer' }} />
+            <div className="sidebar-nav">
+              <IconButton onClick={() => {
+                navigate('/home')
+              }}>
+                <HomeIcon style={{ color: 'black' }} /> <span className='sidebar-nav-link'>Home</span>
+              </IconButton >
 
-                  <IconButton  onClick={()=>{
-                    setIsOpen(false)
-                }}>
-                     <MoreHorizIcon  style={{ color: 'black'}}  /> <span className='sidebar-nav-link'>More</span>
-                  </IconButton>
+              <IconButton onClick={() => {
+                setIsOpen(false)
+              }}>
+                <SearchIcon style={{ color: 'black' }} /> <span className='sidebar-nav-link'>Search</span>
+              </IconButton>
+
+              <IconButton onClick={() => {
+                openModal();
+                setIsOpen(false)
+              }}>
+                <AddCircleOutlineIcon style={{ color: 'black' }} /> <span className='sidebar-nav-link'>Create</span>
+              </IconButton>
+              <IconButton onClick={() => { }}>
+                <AddPhotoAlternateTwoToneIcon style={{ color: 'black' }} /> <span className='sidebar-nav-link'>Add Story</span>
+              </IconButton>
+              
+              <div className="story-button">
+                <IconButton onClick={() => {
+                navigate('/story')
+              }}>
+                <CropOriginalIcon style={{ color: 'black' }} /> <span className='sidebar-nav-link'>Story</span>
+              </IconButton>
+              </div>
+              <IconButton onClick={() => { }}>
+                <MoreHorizIcon style={{ color: 'black' }} /> <span className='sidebar-nav-link'>More</span>
+              </IconButton>
 
 
-                  <IconButton  onClick={()=> navigate('/following')} >
-                     <MoreHorizIcon  style={{ color: 'black'}}  /> <span className='sidebar-nav-link'> My Following </span>
-                  </IconButton>
-                  
 
-                  <div className="profile-btn" onClick={()=> navigate('/profile')}>
-                    <div className="profile-btn-image">
-                       <img src={myDp} alt="...." />
-                    </div>
 
-                    <p>Profile</p>
-                  </div>
+              <IconButton onClick={() => navigate('/following')} >
+              <Diversity1Icon  style={{ color: 'black' }} /> <span className='sidebar-nav-link'>Following </span>
+              </IconButton>
+
+
+              <div className="profile-btn" onClick={() => navigate('/profile')}>
+                <div className="profile-btn-image">
+                  <img src={myDp} alt="...." />
                 </div>
-                </div>
+
+                <p>Profile</p>
+              </div>
             </div>
-
-    
-            </Drawer>
-
+          </div>
         </div>
-    );
+
+
+      </Drawer>
+
+    </div>
+  );
 };
 
 export default Navbar;

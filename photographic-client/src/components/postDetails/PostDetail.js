@@ -36,11 +36,11 @@ const PostDetail = ({ post, showComment, setShowComment }) => {
                 fetch("http://localhost:5000/post/comment", {
                     method: "put",
                     headers: {
+                        'Authorization': `Bearer ${token}`,
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
                         _id: _id,
-                        token: token,
                         comment,
                     }),
                 })
@@ -71,11 +71,11 @@ const PostDetail = ({ post, showComment, setShowComment }) => {
             fetch("http://localhost:5000/post/like", {
                 method: "put",
                 headers: {
+                    'Authorization': `Bearer ${token}`,
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
                     _id: _id,
-                    token: token,
                 }),
             })
                 .then(res => res.json())
@@ -101,11 +101,11 @@ const PostDetail = ({ post, showComment, setShowComment }) => {
             fetch("http://localhost:5000/post/unlike", {
                 method: "put",
                 headers: {
+                    'Authorization': `Bearer ${token}`,
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
                     _id: _id,
-                    token: token,
                 }),
             })
                 .then(res => res.json())

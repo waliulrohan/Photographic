@@ -16,35 +16,16 @@ import { Toaster } from 'react-hot-toast';
 import MyProfile from './components/myProfile/MyProfile';
 import OtherProfile from './components/otherProfile/OtherProfile';
 import MyFollowing from './components/home/MyFollowing';
+import Story from './components/story/Story';
+import FollowingStory from './components/story/FollowingStory';
+import AllStory from './components/story/AllStory';
 
 
 
 export const CreateModal = createContext();
 function App() {
-
-
-
-//   useEffect(() => {
-//     const myId = sessionStorage.getItem("myId");
-//     const token = sessionStorage.getItem("token")
-//     if (myId && token) {
-//         fetch(`http://localhost:5000/user/${myId}`, {
-//             method: "POST",
-//             headers: {
-//                 "Content-Type": "application/json",
-//             },
-//             body: JSON.stringify({
-//                 token: token,
-//             }),
-//         })
-//             .then(res => res.json())
-//             .then(data => {
-
-//                 sessionStorage.setItem("myDp",data.user[0].photo)
-//             });
-//     }
-// }, [])
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [storyModal,setStoryModal] = useState(false)
   const [allPosts , setAllPosts] = useState([])
   
 
@@ -57,7 +38,7 @@ function App() {
   };
 
   return (
-    <CreateModal.Provider value={{ modalIsOpen, setModalIsOpen ,allPosts, setAllPosts }}>
+    <CreateModal.Provider value={{ modalIsOpen, setModalIsOpen ,allPosts, setAllPosts,storyModal,setStoryModal }}>
       <div className="App">
       <div><Toaster/></div>
         <ReactModal
@@ -96,6 +77,11 @@ function App() {
                 <Route path='/' element={<Home />} />
                 <Route path='/profile' element={<MyProfile />} />
                 <Route path='/otherProfile/:id' element={<OtherProfile />} />
+                <Route path='/story' element={<Story />} >
+                  <Route path='followingStory' element={<FollowingStory />} />
+                   <Route path='allStory' element={<AllStory />} />
+                   <Route path='' element={<FollowingStory />} />
+                </Route>
 
             </Route>
 

@@ -8,6 +8,11 @@ import { IconButton } from '@mui/material';
 import { CreateModal } from '../../App';
 import { useNavigate } from 'react-router-dom';
 
+
+import CropOriginalIcon from '@mui/icons-material/CropOriginal';
+import AddPhotoAlternateTwoToneIcon from '@mui/icons-material/AddPhotoAlternateTwoTone';
+import Diversity1Icon from '@mui/icons-material/Diversity1';
+
 const Sidebar = () => {
   const navigate = useNavigate();
     const { modalIsOpen, setModalIsOpen } = useContext(CreateModal); 
@@ -47,12 +52,16 @@ useEffect(()=>{
                      <AddCircleOutlineIcon  style={{ color: 'black'}}  /> <span className='sidebar-nav-link'>Create</span>
                   </IconButton>
 
+                  <IconButton onClick={() => { }}>
+                    <AddPhotoAlternateTwoToneIcon style={{ color: 'black' }} /> <span className='sidebar-nav-link'>Add Story</span>
+                  </IconButton>
+ 
                   <IconButton>
                      <MoreHorizIcon  style={{ color: 'black'}}  /> <span className='sidebar-nav-link'> More </span>
                   </IconButton>
 
                   <IconButton  onClick={()=> navigate('/following')} >
-                     <MoreHorizIcon  style={{ color: 'black'}}  /> <span className='sidebar-nav-link'> My Following </span>
+                     <Diversity1Icon  style={{ color: 'black'}}  /> <span className='sidebar-nav-link'> My Following </span>
                   </IconButton>
 
                   <div className="profile-btn"  onClick={()=> navigate('/profile')}>

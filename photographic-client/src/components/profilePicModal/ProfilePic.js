@@ -17,11 +17,10 @@ if(photo === "https://res.cloudinary.com/dlaikb0id/image/upload/v1705229649/noPr
             fetch('http://localhost:5000/user/removeProfilePic', {
                 method: 'PUT',
                 headers: {
+                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    token,
-                }),
+
             })
                 .then((res) => res.json())
                 .then((data) => {
@@ -50,10 +49,10 @@ const uploadProfilePic =()=>{
             fetch('http://localhost:5000/user/uploadProfilePic', {
                 method: 'PUT',
                 headers: {
+                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    token,
                     photo: imageUrl,
                 }),
             })

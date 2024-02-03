@@ -17,11 +17,11 @@ const MyFollowing = () => {
             fetch("http://localhost:5000/post/myFollowingPosts", {
                 method: "post",
                 headers: {
+                    'Authorization': `Bearer ${token}`,
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
                     following : myData.following,
-                    token: token,
                 }),
             })
                 .then(res => res.json())
@@ -30,17 +30,16 @@ const MyFollowing = () => {
                 });
         }
     }, [myData])
-//. setting myData
+    
+// setting myData
     useEffect(() => {
         if (myId && token) {
             fetch(`http://localhost:5000/user/${myId}`, {
                 method: "POST",
                 headers: {
+                    'Authorization': `Bearer ${token}`,
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({
-                    token: token,
-                }),
             })
                 .then(res => res.json())
                 .then(data => {
@@ -49,7 +48,11 @@ const MyFollowing = () => {
         }
     }, [])
 
-
+    const fakeStories = [
+        { photo: 'https://res.cloudinary.com/dlaikb0id/image/upload/v1705915715/fotor-ai-20231226222744_jnchnr.jpg' },
+        { photo: 'https://res.cloudinary.com/dlaikb0id/image/upload/v1705917126/Cropped_Image_1000_ab9gql.webp' },   
+        { photo: 'https://res.cloudinary.com/dlaikb0id/image/upload/v1706182498/Screen_Shot_2023-10-28_at_11.55.00_vxoujl.png' },
+      ];
     return (
         <div className='home-main' >
 
@@ -72,7 +75,7 @@ const MyFollowing = () => {
                 </div>
 
 
-                <Right></Right>
+                <Right stories={fakeStories}></Right>
 
             </div>
         </div>

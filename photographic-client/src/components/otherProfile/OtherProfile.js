@@ -27,11 +27,11 @@ const myId = sessionStorage.getItem("myId");
             fetch("http://localhost:5000/user/follow", {
                 method: "put",
                 headers: {
+                    'Authorization': `Bearer ${token}`,
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
                     followId: id,
-                    token: token,
                 }),
             })
                 .then(res => res.json())
@@ -51,10 +51,10 @@ const myId = sessionStorage.getItem("myId");
                 method: "put",
                 headers: {
                     "Content-Type": "application/json",
+                    'Authorization': `Bearer ${token}`,
                 },
                 body: JSON.stringify({
                     unfollowId: id,
-                    token: token,
                 }),
             })
                 .then(res => res.json())
@@ -74,11 +74,10 @@ useEffect(() => {
         fetch(`http://localhost:5000/user/${id}`, {
             method: "POST",
             headers: {
+                'Authorization': `Bearer ${token}`,
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-                token: token,
-            }),
+
         })
             .then(res => res.json())
             .then(data => {

@@ -27,12 +27,6 @@ async function followUser(req, res) {
             { $push: { following: req.body.followId } },
             { new: true },
             )
-
-// const stringifiedFollowing = updatedUser.following.map(objectId => objectId.toString());
-
-
-// req.user.following = stringifiedFollowing;
-
             res.json({user : updatedFollowedUser})
     } catch (err) {
         res.status(422).json({ error: err.message });

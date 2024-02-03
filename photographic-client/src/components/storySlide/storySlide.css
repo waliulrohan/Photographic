@@ -1,0 +1,21 @@
+.story-slide{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+.story-slide img{
+    max-width: 100%;
+    max-height: 100%;
+    min-width: 50%;
+}
+.slide-header{
+    flex: .2;
+}
+.slide-photo{
+    flex: .8;
+    display: flex;
+
+justify-content: center;
+align-items: center;
+}

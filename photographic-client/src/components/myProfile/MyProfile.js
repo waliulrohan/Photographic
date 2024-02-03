@@ -17,6 +17,7 @@ import PostDetail from '../postDetails/PostDetail';
 import { IconButton } from '@mui/material';
 import { toast } from 'react-hot-toast';
 import ProfilePic from '../profilePicModal/ProfilePic';
+import ProfileSkeleton from '../loadingSkeletons/ProfileSkeleton';
 
 
 const MyProfile = () => {
@@ -25,7 +26,7 @@ const MyProfile = () => {
     const [showComment, setShowComment] = useState(false)
     const [myData, setMyData] = useState({});
     const [myPosts, setMyPosts] = useState([])
-    const [feched, setFeched] = useState(false)
+    const [fetched, setFetched] = useState(false)
     const token = sessionStorage.getItem("token")
     const [profilePicModal  , setProfilePicModal] = useState(false)
 
@@ -44,11 +45,9 @@ const MyProfile = () => {
                                 fetch(`http://localhost:5000/post/delete/${postId}`, {
                                     method: "POST",
                                     headers: {
+                                        'Authorization': `Bearer ${token}`,
                                         "Content-Type": "application/json",
                                     },
-                                    body: JSON.stringify({
-                                        token: token,
-                                    }),
                                 })
                                     .then(res => res.json())
                                     .then(data => {
@@ -81,17 +80,15 @@ const MyProfile = () => {
             fetch(`http://localhost:5000/user/${myId}`, {
                 method: "POST",
                 headers: {
+                    'Authorization': `Bearer ${token}`,
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({
-                    token: token,
-                }),
             })
                 .then(res => res.json())
                 .then(data => {
                     setMyData(data.user[0])
 
-                    setFeched(true)
+                    setFetched(true)
 
                 });
         }
@@ -103,11 +100,10 @@ const MyProfile = () => {
             fetch("http://localhost:5000/post/myPosts", {
                 method: "post",
                 headers: {
+                    'Authorization': `Bearer ${token}`,
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({
-                    token: token,
-                }),
+
             })
                 .then(res => res.json())
                 .then(data => {
@@ -123,7 +119,12 @@ const MyProfile = () => {
             <div className='home-con'>
 
                 <Sidebar></Sidebar>
-                <div className="profile">
+
+                {
+                    !fetched ?
+                    <ProfileSkeleton />
+                    :
+                   <div className="profile">
                     <div className="profile-main">
                         <div className="profile-pic">
                             <div onClick={()=> setProfilePicModal(true)} className="profile-pic-frame">
@@ -137,13 +138,13 @@ const MyProfile = () => {
                         <div className="profile-details">
                             <p className="profile-name">{myData.name}</p>
                             <p className="profile-email">{myData.email}</p>
-                            {feched &&
+                   
                                 <div className="profile-info">
                                     <p className="followers-count">{myData.followers.length}<span className="info-text"> followers </span></p>
                                     <p className="following-count">{myData.following.length}<span className="info-text"> following </span></p>
                                     <p className="posts-counts">{myPosts.length}<span className="info-text"> posts </span></p>
 
-                                </div>}
+                                </div>
                             <button className='edit-profile'>Edit profile</button>
                         </div>
                     </div>
@@ -175,7 +176,9 @@ const MyProfile = () => {
                     <div className="invisible-space">
                         <h1>space</h1>
                     </div>
-                </div>
+                   </div>
+                }
+
 
 
             </div>
