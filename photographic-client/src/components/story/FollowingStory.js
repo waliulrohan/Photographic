@@ -24,7 +24,7 @@ const FollowingStory = () => {
 // setting myData
     useEffect(() => {
         if (myId && token) {
-            fetch(`http://localhost:5000/user/${myId}`, {
+            fetch(`https://photographic-server.onrender.com/user/${myId}`, {
                 method: "POST",
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -43,7 +43,7 @@ const FollowingStory = () => {
     useEffect(() => {
 
         if (token && myData.following) {
-            fetch("http://localhost:5000/post/myFollowingPosts", {
+            fetch("https://photographic-server.onrender.com/post/myFollowingPosts", {
                 method: "post",
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -59,7 +59,7 @@ const FollowingStory = () => {
                 });
 
                 // following story
-                fetch("http://localhost:5000/story/followingStory", {
+                fetch("https://photographic-server.onrender.com/story/followingStory", {
                     method: "post",
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -103,6 +103,14 @@ const FollowingStory = () => {
     const closeSlider = () => {
       setIsSliderOpen(false);
     };
+
+  if (followingStory.length === 0) {
+    return(
+      <div className="no-story">
+      <p>Stories will appear here</p>
+    </div>
+    )
+  }  
     return (
         <div className="all-story-con">
       {followingStory.map((story, index) => (

@@ -15,7 +15,7 @@ const Search = () => {
 const searchUser= (value)=>{
     setSearch(value)
     if (token , search) {
-        fetch(`http://localhost:5000/user/search/searchUser`, {
+        fetch(`https://photographic-server.onrender.com/user/search/searchUser`, {
             method: "POST",
             headers: {
                 'Authorization': `Bearer ${token}`,

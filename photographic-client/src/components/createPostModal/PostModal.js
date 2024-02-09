@@ -55,7 +55,7 @@ const PostModal = () => {
     const handleShare = () => {
         if (imageUrl && caption) {
             if (myId && token) {
-                fetch('http://localhost:5000/post/createPost', {
+                fetch('https://photographic-server.onrender.com/post/createPost', {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${token}`,

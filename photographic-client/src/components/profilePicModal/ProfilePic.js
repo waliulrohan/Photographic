@@ -14,7 +14,7 @@ if(photo === "https://res.cloudinary.com/dlaikb0id/image/upload/v1705229649/noPr
     toast.error("Profile pic already removed")    
 }else{
            if (token) {
-            fetch('http://localhost:5000/user/removeProfilePic', {
+            fetch('https://photographic-server.onrender.com/user/removeProfilePic', {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -46,7 +46,7 @@ if(photo === "https://res.cloudinary.com/dlaikb0id/image/upload/v1705229649/noPr
 const uploadProfilePic =()=>{
     if (imageUrl) {
         if (token) {
-            fetch('http://localhost:5000/user/uploadProfilePic', {
+            fetch('https://photographic-server.onrender.com/user/uploadProfilePic', {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${token}`,

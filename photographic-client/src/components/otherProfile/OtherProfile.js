@@ -20,11 +20,14 @@ const OtherProfile = () => {
 const {id} = useParams()
 const myId = sessionStorage.getItem("myId");
 
+if(myData.name){
+    document.title = myData.name;
+}
 
 // follow 
     const handleFollow = () => {
         if (token) {
-            fetch("http://localhost:5000/user/follow", {
+            fetch("https://photographic-server.onrender.com/user/follow", {
                 method: "put",
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -47,7 +50,7 @@ const myId = sessionStorage.getItem("myId");
 
     const handleUnfollow = () => {
         if (token) {
-            fetch("http://localhost:5000/user/unfollow", {
+            fetch("https://photographic-server.onrender.com/user/unfollow", {
                 method: "put",
                 headers: {
                     "Content-Type": "application/json",
@@ -71,7 +74,7 @@ const myId = sessionStorage.getItem("myId");
 
 useEffect(() => {
     if (id && token) {
-        fetch(`http://localhost:5000/user/${id}`, {
+        fetch(`https://photographic-server.onrender.com/user/${id}`, {
             method: "POST",
             headers: {
                 'Authorization': `Bearer ${token}`,

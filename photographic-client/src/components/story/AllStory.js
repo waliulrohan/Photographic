@@ -27,7 +27,7 @@ const AllStory = () => {
     // fetching Stories
 useEffect(()=>{
   if(token){
-      fetch('http://localhost:5000/story/allStory', {
+      fetch('https://photographic-server.onrender.com/story/allStory', {
     headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
@@ -53,6 +53,15 @@ console.log(data);
     const closeSlider = () => {
       setIsSliderOpen(false);
     };
+
+    if (allStory.length === 0) {
+      return(
+        <div className="no-story">
+        <p>Stories will appear here</p>
+      </div>
+      )
+    } 
+
     return (
         <div className="all-story-con">
       {allStory.map((story, index) => (

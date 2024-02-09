@@ -22,6 +22,9 @@ import ProfileSkeleton from '../loadingSkeletons/ProfileSkeleton';
 
 
 const MyProfile = () => {
+    // title
+document.title = "Photographic-My Profile"
+
     const myId = sessionStorage.getItem("myId");
     const [singlePost, setSinglePost] = useState({})
     const [showComment, setShowComment] = useState(false)
@@ -43,7 +46,7 @@ const MyProfile = () => {
                         // delete post 
 
                             if (token) {
-                                fetch(`http://localhost:5000/post/delete/${postId}`, {
+                                fetch(`https://photographic-server.onrender.com/post/delete/${postId}`, {
                                     method: "POST",
                                     headers: {
                                         'Authorization': `Bearer ${token}`,
@@ -102,7 +105,7 @@ const MyProfile = () => {
 
     useEffect(() => {
         if (myId && token) {
-            fetch(`http://localhost:5000/user/${myId}`, {
+            fetch(`https://photographic-server.onrender.com/user/${myId}`, {
                 method: "POST",
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -122,7 +125,7 @@ const MyProfile = () => {
     useEffect(() => {
         const token = sessionStorage.getItem("token")
         if (token) {
-            fetch("http://localhost:5000/post/myPosts", {
+            fetch("https://photographic-server.onrender.com/post/myPosts", {
                 method: "post",
                 headers: {
                     'Authorization': `Bearer ${token}`,

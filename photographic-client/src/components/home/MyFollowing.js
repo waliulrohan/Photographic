@@ -5,17 +5,22 @@ import Card from './Card';
 import Right from './Right';
 import Navbar from '../navbar/Navbar';
 import { CreateModal } from '../../App';
+import CardSkeletons from '../loadingSkeletons/CardSkeletons';
 const MyFollowing = () => {
+// title
+document.title = "Photographic-Following"
+
     const token = sessionStorage.getItem("token");
     const myId = sessionStorage.getItem("myId");
     const [myData, setMyData] = useState({});
     const [ followingPosts , setFollowingPosts  ] = useState([])
     const [followingStory , setFollowingStory] = useState([])
+    const [loading,setLoading] = useState(true)
 
     useEffect(() => {
 
         if (token && myData.following) {
-            fetch("http://localhost:5000/post/myFollowingPosts", {
+            fetch("https://photographic-server.onrender.com/post/myFollowingPosts", {
                 method: "post",
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -31,7 +36,7 @@ const MyFollowing = () => {
                 });
 
                 // following story
-                fetch("http://localhost:5000/story/followingStory", {
+                fetch("https://photographic-server.onrender.com/story/followingStory", {
                     method: "post",
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -43,6 +48,7 @@ const MyFollowing = () => {
                 })
                     .then(res => res.json())
                     .then(data => {
+                        setLoading(false)
                         setFollowingStory(data)
                     });
 
@@ -55,7 +61,7 @@ const MyFollowing = () => {
 // setting myData
     useEffect(() => {
         if (myId && token) {
-            fetch(`http://localhost:5000/user/${myId}`, {
+            fetch(`https://photographic-server.onrender.com/user/${myId}`, {
                 method: "POST",
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -77,19 +83,26 @@ const MyFollowing = () => {
             <div className='home-con'>
 
                 <Sidebar></Sidebar>
-                <div className="all-cards">
-                    {followingPosts ?
-                      followingPosts.map(post => <Card post={post} key={post._id} />)
-                        :
-                        'loading.,....'
 
-                    }
 
-                    <div className="invisible-space">
-    <h1>space</h1>
-</div>
-        
-                </div>
+        {loading?
+         <div id='all-cards' className='all-cards'>
+                 <CardSkeletons />
+        </div>
+        :
+        <div id='all-cards' className='all-cards'>
+          {followingPosts ? (
+            followingPosts.map(post => <Card post={post} key={post._id} />)
+
+          ) : (
+            'loading....'
+          )}
+
+          <div className='invisible-space'>
+            <h1>space</h1>
+          </div>
+        </div>
+      }
 
 
                 <Right stories={followingStory}></Right>

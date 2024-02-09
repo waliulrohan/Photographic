@@ -29,7 +29,7 @@ const Right = ({stories}) => {
   const closeSlider = () => {
     setIsSliderOpen(false);
   };
-if(stories){
+if(stories.length > 0){
     return (
     <div className='right-con'>
       {stories.map((story, index) => (
@@ -56,7 +56,11 @@ if(stories){
     </div>
   );
 }else{
-  return "loading///././..//./.../././/../"
+  return (
+    <div className="right-con no-story">
+      <p>Stories will appear here</p>
+    </div>
+  )
 }
 
 };

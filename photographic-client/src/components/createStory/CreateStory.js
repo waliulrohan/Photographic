@@ -55,7 +55,7 @@ const CreateStory = () => {
     const handleShare = () => {
         if (imageUrl) {
             if (token) {
-                fetch('http://localhost:5000/story/createStory', {
+                fetch('https://photographic-server.onrender.com/story/createStory', {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${token}`,

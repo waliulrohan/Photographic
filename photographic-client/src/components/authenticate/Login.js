@@ -9,7 +9,7 @@ const Login = () => {
     const [email,setEmail] = useState('');
     const handleLogin = () =>{
         if (email && password ) {
-            fetch('http://localhost:5000/auth/login',{
+            fetch('https://photographic-server.onrender.com/auth/login',{
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json'

@@ -33,7 +33,7 @@ const PostDetail = ({ post, showComment, setShowComment }) => {
 
         if (comment) {
             if (token) {
-                fetch("http://localhost:5000/post/comment", {
+                fetch("https://photographic-server.onrender.com/post/comment", {
                     method: "put",
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -68,7 +68,7 @@ const PostDetail = ({ post, showComment, setShowComment }) => {
     //like
     const handleLike = () => {
         if (token) {
-            fetch("http://localhost:5000/post/like", {
+            fetch("https://photographic-server.onrender.com/post/like", {
                 method: "put",
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -98,7 +98,7 @@ const PostDetail = ({ post, showComment, setShowComment }) => {
     //unlike
     const handleUnlike = () => {
         if (token) {
-            fetch("http://localhost:5000/post/unlike", {
+            fetch("https://photographic-server.onrender.com/post/unlike", {
                 method: "put",
                 headers: {
                     'Authorization': `Bearer ${token}`,

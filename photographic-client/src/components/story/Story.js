@@ -5,6 +5,8 @@ import Navbar from '../navbar/Navbar';
 
 import './story.css'
 const Story = () => {
+    // title
+document.title = "Photographic-Story"
     const navigate = useNavigate();
     const [isAllStory, setIsAllStory] = useState(false)
     const [isAllTab, setIsAllTab] = useState(false)

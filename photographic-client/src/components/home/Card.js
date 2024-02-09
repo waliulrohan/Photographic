@@ -17,6 +17,9 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Card = ({ post }) => {
+
+
+
     const [showComment, setShowComment] = useState(false)
     const [comment, setComment] = useState('')
     const { allPosts, setAllPosts } = useContext(CreateModal);
@@ -30,7 +33,7 @@ const Card = ({ post }) => {
 
         if (comment) {
             if (token) {
-                fetch("http://localhost:5000/post/comment", {
+                fetch("https://photographic-server.onrender.com/post/comment", {
                     method: "put",
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -67,7 +70,7 @@ const Card = ({ post }) => {
     //like
     const handleLike = () => {
         if (token) {
-            fetch("http://localhost:5000/post/like", {
+            fetch("https://photographic-server.onrender.com/post/like", {
                 method: "put",
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -97,7 +100,7 @@ const Card = ({ post }) => {
     //unlike
     const handleUnlike = () => {
         if (token) {
-            fetch("http://localhost:5000/post/unlike", {
+            fetch("https://photographic-server.onrender.com/post/unlike", {
                 method: "put",
                 headers: {
                     'Authorization': `Bearer ${token}`,

@@ -10,6 +10,10 @@ import ClockLoader from 'react-spinners/ClockLoader'
 
 
 const Home = () => {
+
+  // title
+document.title = "Photographic-Home"
+
   const { allPosts, setAllPosts } = useContext(CreateModal);
   const [allCardsDiv, setAllCardsDiv] = useState(null);
   const [loading,setLoading] = useState(true)
@@ -20,7 +24,7 @@ const Home = () => {
   const fetchPosts = () => {
     const token = sessionStorage.getItem('token');
     if (token) {
-      fetch(`http://localhost:5000/post/allPosts?skip=${skip}`)
+      fetch(`https://photographic-server.onrender.com/post/allPosts?skip=${skip}`)
         .then(res => res.json())
         .then(data =>{
           setLoading(false)
@@ -62,7 +66,7 @@ const Home = () => {
 // fetching Stories
 useEffect(()=>{
   if(token){
-      fetch('http://localhost:5000/story/allStory', {
+      fetch('https://photographic-server.onrender.com/story/allStory', {
     headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
