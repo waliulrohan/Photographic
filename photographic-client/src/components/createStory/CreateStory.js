@@ -1,17 +1,17 @@
 import React, { useContext, useState } from 'react';
-import './post-modal.css';
-import { toast } from 'react-hot-toast';
+import './createStory.css'
+
 import { CreateModal } from '../../App';
-import { IconButton } from '@mui/material';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-const PostModal = () => {
-    const { setModalIsOpen,setAllPosts } = useContext(CreateModal);
+import { toast } from 'react-hot-toast';
+
+const CreateStory = () => {
+
+
+    const { storyModal,setStoryModal } = useContext(CreateModal);
 
 
     const [imageSrc, setImageSrc] = useState('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSowjKGUP8tcOoGVNrVcuuCpZbN0jsyRwzclg&usqp=CAU');
     const [imageUrl, setImageUrl] = useState('');
-    const [caption, setCaption] = useState('');
-    const myId = sessionStorage.getItem("myId");
     const token = sessionStorage.getItem("token");
 
     const handleFileChange = async (event) => {
@@ -53,16 +53,15 @@ const PostModal = () => {
     };
 
     const handleShare = () => {
-        if (imageUrl && caption) {
-            if (myId && token) {
-                fetch('http://localhost:5000/post/createPost', {
+        if (imageUrl) {
+            if (token) {
+                fetch('http://localhost:5000/story/createStory', {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${token}`,
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        caption,
                         photo: imageUrl,
                     }),
                 })
@@ -71,56 +70,38 @@ const PostModal = () => {
                         if (data.error) {
                             toast.error(data.error);
                         } else {
-                            setModalIsOpen(false)
-                            toast.success(data.message);
-                            setAllPosts(data.allPosts)
+                            toast.success(data.message)
+                            setStoryModal(false)
                         }
                     })
                     .catch((error) => {
                         console.error('Error during fetch:', error);
                     });
             }
-        } else if (!caption && !imageUrl) {
-            toast.error('Please add a caption and upload an image');
-        } else if (!caption) {
-            toast.error('Please add a caption');
         } else if (!imageUrl) {
             toast.error('Please upload an image');
         }
     };
 
     return (
-        <div className='post-modal'>
-
-            <div className="post-photo">
-            <div className="modal-closing-button">
-            <IconButton onClick={()=>setModalIsOpen(false)}>
-              <ArrowBackIcon />
-            </IconButton>
+           <div className='story-modal'>
+            <div className="story-share-con">
+            <button className="story-share-button" onClick={handleShare}>
+                    Share
+                </button>
             </div>
-                           
-                <img id='outImage' src={imageSrc} alt="" />
+
+            <div className="story-modal-photo">
+                                <img className='story-outImage' src={imageSrc} alt="" />
                 <label htmlFor="picField" className='picFieldLabel'>
                     Upload image
                 </label>
                 <input type="file" name="picField" id="picField" size="24" onChange={handleFileChange} />
             </div>
-            <div className="post-caption">
-                <textarea
-                    name=""
-                    id="caption-input"
-                    cols="30"
-                    rows="5"
-                    placeholder='Add your thoughts... '
-                    value={caption}
-                    onChange={(e) => setCaption(e.target.value)}
-                ></textarea>
-                <button className="caption-button" onClick={handleShare}>
-                    Share
-                </button>
-            </div>
+
+
         </div>
     );
 };
 
-export default PostModal;
+export default CreateStory;

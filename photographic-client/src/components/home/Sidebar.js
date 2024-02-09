@@ -15,7 +15,8 @@ import Diversity1Icon from '@mui/icons-material/Diversity1';
 
 const Sidebar = () => {
   const navigate = useNavigate();
-    const { modalIsOpen, setModalIsOpen } = useContext(CreateModal); 
+    const {setStoryModal, setModalIsOpen, setSearchModal } = useContext(CreateModal); 
+
     const [myDp,setMyDp]=useState('')
 useEffect(()=>{
   setMyDp(sessionStorage.getItem("myDp"))
@@ -25,11 +26,6 @@ useEffect(()=>{
     const openModal = () => {
         setModalIsOpen(true);
       };
-      
-      const closeModal = () => {
-        setModalIsOpen(false);
-      };
-
 
     return (
         <div className='sidebar-con'>
@@ -41,7 +37,7 @@ useEffect(()=>{
                       <HomeIcon  style={{ color: 'black'}}  /> <span className='sidebar-nav-link'>Home</span>
                   </IconButton> 
 
-                  <IconButton>
+                  <IconButton onClick={()=>setSearchModal(true)}>
                      <SearchIcon style={{ color: 'black'}}   /> <span className='sidebar-nav-link'>Search</span>
                   </IconButton>
 
@@ -52,16 +48,15 @@ useEffect(()=>{
                      <AddCircleOutlineIcon  style={{ color: 'black'}}  /> <span className='sidebar-nav-link'>Create</span>
                   </IconButton>
 
-                  <IconButton onClick={() => { }}>
+                  <IconButton onClick={() => { 
+                        setStoryModal(true)
+                  }}>
                     <AddPhotoAlternateTwoToneIcon style={{ color: 'black' }} /> <span className='sidebar-nav-link'>Add Story</span>
                   </IconButton>
  
-                  <IconButton>
-                     <MoreHorizIcon  style={{ color: 'black'}}  /> <span className='sidebar-nav-link'> More </span>
-                  </IconButton>
 
                   <IconButton  onClick={()=> navigate('/following')} >
-                     <Diversity1Icon  style={{ color: 'black'}}  /> <span className='sidebar-nav-link'> My Following </span>
+                     <Diversity1Icon  style={{ color: 'black'}}  /> <span className='sidebar-nav-link'>Following </span>
                   </IconButton>
 
                   <div className="profile-btn"  onClick={()=> navigate('/profile')}>

@@ -4,7 +4,7 @@ const router = express.Router();
 const mongoose = require("mongoose");
 
 
-const {getUser,followUser, unfollowUser, uploadProfilePic, removeProfilePic} = require('../controllers/userControllers');
+const {getUser,followUser, unfollowUser, uploadProfilePic, removeProfilePic, searchUser} = require('../controllers/userControllers');
 const { checkLogin } = require("../middleweres/user/checkLogin");
 
 //get user profile
@@ -23,5 +23,8 @@ router.put('/uploadProfilePic' ,checkLogin, uploadProfilePic )
 
 // remove profile pic
 router.put('/removeProfilePic' ,checkLogin, removeProfilePic )
+
+// search user 
+router.post('/search/searchUser',checkLogin,searchUser)
 
 module.exports = router;

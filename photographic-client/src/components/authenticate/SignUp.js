@@ -53,7 +53,7 @@ const SignUp = () => {
 
 
            <img src={logo} alt="" className="auth-logo" />
-                        <p id="sign-up-text">Sign up to see photos and videos <br /> from your friends.</p>
+                        <p id="sign-up-text">Sign up to see photos <br /> from your friends.</p>
             <input onChange={(e)=> setName(e.target.value)} type="text" className="input-field" placeholder='full name' name='name' required />
             <input onChange={(e)=> setUsername(e.target.value)} type="text" className="input-field" placeholder='username' name='username' required />
             <input onChange={(e)=> setEmail(e.target.value)} type="email" className="input-field" placeholder='email' name='email' required/>

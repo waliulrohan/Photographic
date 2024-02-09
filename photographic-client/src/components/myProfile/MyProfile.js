@@ -5,6 +5,7 @@ import Sidebar from '../home/Sidebar';
 import Navbar from '../navbar/Navbar';
 
 import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 // confirm dialogue
 
@@ -67,6 +68,30 @@ const MyProfile = () => {
                 {
                     label: 'No',
                     onClick: () => toast.error("You don't want to delete")
+                }
+            ]
+        });
+    };
+
+
+    // logout confirm
+    const handleLogout = (postId) => {
+        confirmAlert({
+            title: 'Log Out',
+            message: 'Are you sure.',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => {
+                         sessionStorage.removeItem("token");
+                         sessionStorage.removeItem("myDp");
+                         sessionStorage.removeItem("myId");
+                         window.location.reload();
+                    }
+                },
+                {
+                    label: 'No',
+                    onClick: () => toast.error("You don't want to logout")
                 }
             ]
         });
@@ -145,7 +170,8 @@ const MyProfile = () => {
                                     <p className="posts-counts">{myPosts.length}<span className="info-text"> posts </span></p>
 
                                 </div>
-                            <button className='edit-profile'>Edit profile</button>
+                            <button className='edit-profile'>Profile</button>
+                            <button className='logout-button' onClick={()=> handleLogout()}><LogoutIcon  style={{ fill: 'rgba(108, 108, 235, 0.795)', fontSize: 20 }} /></button>
                         </div>
                     </div>
 
@@ -170,12 +196,13 @@ const MyProfile = () => {
                                 }
                             </div>
                         ))}
-                    </div>
-
-
-                    <div className="invisible-space">
+                        <div className="invisible-space">
                         <h1>space</h1>
                     </div>
+                    </div>
+
+
+
                    </div>
                 }
 

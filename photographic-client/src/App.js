@@ -19,69 +19,99 @@ import MyFollowing from './components/home/MyFollowing';
 import Story from './components/story/Story';
 import FollowingStory from './components/story/FollowingStory';
 import AllStory from './components/story/AllStory';
+import CreateStory from './components/createStory/CreateStory';
+import Search from './components/search/Search'
+import NotFound from './components/notFound/NotFound';
 
 
 
 export const CreateModal = createContext();
 function App() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [storyModal,setStoryModal] = useState(false)
-  const [allPosts , setAllPosts] = useState([])
-  
-
-  const openModal = () => {
-    setModalIsOpen(true);
-  };
+  const [storyModal, setStoryModal] = useState(false)
+  const [searchModal , setSearchModal] = useState(false)
+  const [allPosts, setAllPosts] = useState([])
 
   const closeModal = () => {
     setModalIsOpen(false);
   };
 
   return (
-    <CreateModal.Provider value={{ modalIsOpen, setModalIsOpen ,allPosts, setAllPosts,storyModal,setStoryModal }}>
+    <CreateModal.Provider value={{ modalIsOpen, setModalIsOpen, allPosts, setAllPosts, storyModal, setStoryModal ,searchModal , setSearchModal}}>
       <div className="App">
-      <div><Toaster/></div>
-        <ReactModal
+        <div><Toaster /></div>
+     <ReactModal
           style={{
             overlay: {
-
               zIndex: '5000',
             },
             content: {
               padding: "0px",
-              height:'90%',
+              height: '90%',
             },
           }}
           isOpen={modalIsOpen}
           onRequestClose={closeModal}
         >
-
-             <IconButton  onClick={closeModal}>
-                <ArrowBackIcon />
-             </IconButton>
-
           <PostModal />
+    </ReactModal>
 
-        </ReactModal>
+    <ReactModal
+          style={{
+            overlay: {
+              zIndex: '5000',
+            },
+            content: {
+              padding: "0px",
+              height: '90%',
+              maxHeight: "90%",
+            },
+          }}
+          isOpen={storyModal}
+          onRequestClose={()=>setStoryModal(false)}
+        >
+            <IconButton onClick={()=>setStoryModal(false)}>
+              <ArrowBackIcon />
+            </IconButton>
+          <CreateStory></CreateStory>
+    </ReactModal>
 
         <BrowserRouter>
+
+        <ReactModal
+          style={{
+            overlay: {
+              zIndex: '5000',
+            },
+            content: {
+              padding: "0px",
+              height: '90%',
+            },
+          }}
+          isOpen={searchModal}
+          onRequestClose={ ()=> setSearchModal(false)}
+        >
+          <Search />
+    </ReactModal>
+
           <Routes>
+          <Route path='*' element={<NotFound />} />
             <Route path='/authenticate/*' element={<Authenticate></Authenticate>}>
               <Route path='signUp' element={<SignUp></SignUp>} />
               <Route path='login' element={<Login></Login>} />
               <Route path='' element={<Login></Login>} />
             </Route>
             <Route path="/" element={<PrivateOutlet />}>
-                <Route path='/home' element={<Home />} />
-                <Route path='following' element={<MyFollowing />} />
-                <Route path='/' element={<Home />} />
-                <Route path='/profile' element={<MyProfile />} />
-                <Route path='/otherProfile/:id' element={<OtherProfile />} />
-                <Route path='/story' element={<Story />} >
-                  <Route path='followingStory' element={<FollowingStory />} />
-                   <Route path='allStory' element={<AllStory />} />
-                   <Route path='' element={<FollowingStory />} />
-                </Route>
+              <Route path='/home' element={<Home />} />
+              <Route path='following' element={<MyFollowing />} />
+              <Route path='/' element={<Home />} />
+              <Route path='/profile' element={<MyProfile />} />
+              <Route path='/otherProfile/:id' element={<OtherProfile />} />
+              <Route path='/story' element={<Story />} >
+                <Route path='followingStory' element={<FollowingStory />} />
+                <Route path='allStory' element={<AllStory />} />
+                <Route path='' element={<FollowingStory />} />
+              </Route>
 
             </Route>
 

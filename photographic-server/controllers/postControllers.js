@@ -7,7 +7,7 @@ async function getAllPosts(req,res){
     let skip = req.query.skip
 try{
 
-    const posts = await POST.find().limit(3).skip(parseInt(skip)).populate("comments.commenter" , "name photo").populate("postedBy","_id name photo").sort("-createdAt")
+    const posts = await POST.find().limit(10).skip(parseInt(skip)).populate("comments.commenter" , "name photo").populate("postedBy","_id name photo").sort("-createdAt")
     res.status(200).json(posts)
 }catch{
         res.status(500).json({ error: "Internal Server Error" });

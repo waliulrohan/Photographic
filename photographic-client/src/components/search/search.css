@@ -1,0 +1,64 @@
+.search-con{
+    max-width: 100%;
+}
+.search-input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: #747474 1px solid ;
+}
+.search-field{
+    border: #efefef 2px solid ;
+    width: 60%;  
+    height: 30px;
+    margin: 10px;
+    padding: 5px 20px;
+    border-radius: 20px;
+
+}
+.search-result{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    height: 100%;
+    overflow: auto;
+    gap: 5px;
+}
+.searchItem{
+    box-shadow: rgba(149, 157, 165, 0.137) 0px 8px 24px;
+    border-radius:6px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin: 5px 0px;
+    cursor: pointer;
+}
+.searchItem:hover{
+    scale: 1.01;
+    box-shadow: rgba(149, 157, 165, 0.514) 0px 8px 24px;
+}
+.searchItem-name{
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+.searchItem-email{
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+@media only screen and (max-width: 600px) {
+
+    .searchItem-name{
+        font-size: .8rem;
+        font-weight: 700;
+    }
+    .searchItem-email{
+        font-size: .7rem;
+        font-weight: 500;
+    }
+    
+       }
+           
+       

@@ -150,12 +150,14 @@ useEffect(() => {
                                 }
                             </div>
                         ))}
-                    </div>
-
 
                     <div className="invisible-space">
                         <h1>space</h1>
+                    </div> 
                     </div>
+
+
+
                 </div> 
                 
                 }

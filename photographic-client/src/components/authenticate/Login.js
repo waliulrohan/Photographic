@@ -39,6 +39,7 @@ const Login = () => {
     return (
         <div className='login-con'>
             <img src={logo} alt="" className="auth-logo" />
+            <p id="sign-up-text">Login with your account</p>
             <input  onChange={(e)=> setEmail(e.target.value)}  type="email" className="input-field" placeholder='email' name='email' required/>
             <input  onChange={(e)=> setPassword(e.target.value)}  type="password" className="input-field" placeholder='password' name='password' required/>
 

@@ -1,4 +1,4 @@
-const STORY = require("../models/storyModal")
+const STORY = require("../models/storyModel")
 
 
 //create story

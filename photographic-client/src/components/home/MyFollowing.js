@@ -10,6 +10,7 @@ const MyFollowing = () => {
     const myId = sessionStorage.getItem("myId");
     const [myData, setMyData] = useState({});
     const [ followingPosts , setFollowingPosts  ] = useState([])
+    const [followingStory , setFollowingStory] = useState([])
 
     useEffect(() => {
 
@@ -28,7 +29,27 @@ const MyFollowing = () => {
                 .then(data => {
                     setFollowingPosts(data)
                 });
+
+                // following story
+                fetch("http://localhost:5000/story/followingStory", {
+                    method: "post",
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        following : myData.following,
+                    }),
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        setFollowingStory(data)
+                    });
+
         }
+
+
+
     }, [myData])
     
 // setting myData
@@ -48,11 +69,7 @@ const MyFollowing = () => {
         }
     }, [])
 
-    const fakeStories = [
-        { photo: 'https://res.cloudinary.com/dlaikb0id/image/upload/v1705915715/fotor-ai-20231226222744_jnchnr.jpg' },
-        { photo: 'https://res.cloudinary.com/dlaikb0id/image/upload/v1705917126/Cropped_Image_1000_ab9gql.webp' },   
-        { photo: 'https://res.cloudinary.com/dlaikb0id/image/upload/v1706182498/Screen_Shot_2023-10-28_at_11.55.00_vxoujl.png' },
-      ];
+
     return (
         <div className='home-main' >
 
@@ -75,7 +92,7 @@ const MyFollowing = () => {
                 </div>
 
 
-                <Right stories={fakeStories}></Right>
+                <Right stories={followingStory}></Right>
 
             </div>
         </div>

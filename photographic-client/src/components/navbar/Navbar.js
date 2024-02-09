@@ -18,7 +18,7 @@ import AddPhotoAlternateTwoToneIcon from '@mui/icons-material/AddPhotoAlternateT
 import Diversity1Icon from '@mui/icons-material/Diversity1';
 const Navbar = () => {
   const navigate = useNavigate();
-  const { modalIsOpen, setModalIsOpen } = useContext(CreateModal);
+  const {setStoryModal, setModalIsOpen, setSearchModal } = useContext(CreateModal); 
   const [isOpen, setIsOpen] = React.useState(false)
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState)
@@ -52,6 +52,10 @@ const Navbar = () => {
         onClose={toggleDrawer}
         direction='left'
         className='bla bla bla'
+        style={{
+          width:"200px"
+        }
+        }
       >
         <div className='navbar-drawer'>
 
@@ -59,37 +63,40 @@ const Navbar = () => {
             <img src={logo} alt="logo...." className="sidebar-logo" onClick={() => navigate("/")} style={{ cursor: 'pointer' }} />
             <div className="sidebar-nav">
               <IconButton onClick={() => {
-                navigate('/home')
+                navigate('/home');
+                setIsOpen(false);
               }}>
                 <HomeIcon style={{ color: 'black' }} /> <span className='sidebar-nav-link'>Home</span>
               </IconButton >
 
               <IconButton onClick={() => {
                 setIsOpen(false)
+                setSearchModal(true)
               }}>
                 <SearchIcon style={{ color: 'black' }} /> <span className='sidebar-nav-link'>Search</span>
               </IconButton>
 
               <IconButton onClick={() => {
                 openModal();
-                setIsOpen(false)
+                setIsOpen(false);
               }}>
                 <AddCircleOutlineIcon style={{ color: 'black' }} /> <span className='sidebar-nav-link'>Create</span>
               </IconButton>
-              <IconButton onClick={() => { }}>
+              <IconButton onClick={() => {
+                setStoryModal(true);
+                setIsOpen(false);
+               }}>
                 <AddPhotoAlternateTwoToneIcon style={{ color: 'black' }} /> <span className='sidebar-nav-link'>Add Story</span>
               </IconButton>
               
               <div className="story-button">
                 <IconButton onClick={() => {
-                navigate('/story')
+                navigate('/story');
+                setIsOpen(false);
               }}>
                 <CropOriginalIcon style={{ color: 'black' }} /> <span className='sidebar-nav-link'>Story</span>
               </IconButton>
               </div>
-              <IconButton onClick={() => { }}>
-                <MoreHorizIcon style={{ color: 'black' }} /> <span className='sidebar-nav-link'>More</span>
-              </IconButton>
 
 
 

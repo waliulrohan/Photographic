@@ -38,6 +38,8 @@ overflow: hidden;
     display: flex;
     flex-direction: column;
     gap: 15px;
+    align-items: flex-start;
+   margin-left: 20px;
 }
 .sidebar-nav-link{
     color: black;
@@ -48,7 +50,6 @@ overflow: hidden;
 .profile-btn{
     display: flex;
     align-items: center;
-    justify-content: center;
     max-width: 100%;
     gap: 3px;
 
@@ -270,11 +271,14 @@ margin: 3px;
     flex: .4;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: 10px;
+    grid-gap: .5px;
     padding: 5px;
+    overflow:scroll;
+    height: 100vh;
 }
 .story-photo{
-    max-width: 100%;
+    max-height: inherit;
+    max-width: 90%;
 }
 
   .right-con-story{
@@ -300,6 +304,14 @@ margin: 3px;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 999;
   }
+
+  .story-display-con{
+    max-height: 30vh;
+    border:#e7e7e7 .2px solid ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   
 .invisible-space{
     color: white;
@@ -307,7 +319,11 @@ margin: 3px;
     width: 30px;
     display: none;
 }
-
+.clock-loader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 @media only screen and (max-width: 950px) {
 .sidebar-con{
     display: none;
@@ -332,7 +348,9 @@ margin: 3px;
 }
 
 @media only screen and (max-width: 600px) {
-
+    .sidebar-nav{
+        gap:8px;
+    }
     .right-con{
       display: none;
       

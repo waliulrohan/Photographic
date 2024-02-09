@@ -144,7 +144,7 @@ useEffect(()=>{
             <div className="card-main">
 
                 <div className="card-image">
-                    <img src={photo} alt="loading...." />
+                    <img className='card-image-photo' src={photo} alt="loading...." />
 
                 </div>
 
@@ -176,9 +176,6 @@ useEffect(()=>{
                         <p className="comment-count">{comments.length}</p>
                     </div>
 
-                    <IconButton>
-                        <SendOutlinedIcon />
-                    </IconButton>
                 </div>
 
                 <div className="card-description">

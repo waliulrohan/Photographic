@@ -29,11 +29,11 @@ const Right = ({stories}) => {
   const closeSlider = () => {
     setIsSliderOpen(false);
   };
-
-  return (
+if(stories){
+    return (
     <div className='right-con'>
       {stories.map((story, index) => (
-        <div key={index} onClick={() => openSlider(index)}>
+        <div key={index} onClick={() => openSlider(index)} className='story-display-con'>
           <img className='story-photo' src={story.photo} alt="" />
         </div>
       ))}
@@ -50,8 +50,15 @@ const Right = ({stories}) => {
           </div>
         </div>
       )}
+      <div className='invisible-space'>
+            <h1>space</h1>
+          </div>
     </div>
   );
+}else{
+  return "loading///././..//./.../././/../"
+}
+
 };
 
 export default Right;

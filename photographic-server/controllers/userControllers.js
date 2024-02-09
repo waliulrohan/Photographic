@@ -83,8 +83,26 @@ async function removeProfilePic(req, res) {
 
 }
 
+// search user
+async function searchUser(req, res) {
+    try {
+        if(req.body.email){
+        const emailRegex = new RegExp(req.body.email, 'i');
+        const users = await USER.find({ email: emailRegex }).select("-password");
+        if (users.length === 0) {
+            return res.status(404).json({ error: "User not found" });
+        }
+        res.status(200).json({ users }); 
+        }else{
+            return res.status(404).json({ error: "please provide email" });
+        }
 
+    } catch (error) {
+        console.error("Error searching for user:", error);
+        return res.status(500).json({ error: "Internal server error" });
+    }
 
+}
 
 module.exports = {
     getUser,
@@ -92,5 +110,6 @@ module.exports = {
     unfollowUser,
     uploadProfilePic,
     removeProfilePic,
+    searchUser,
  
 }
