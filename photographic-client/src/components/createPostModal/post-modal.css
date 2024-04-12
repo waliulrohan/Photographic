@@ -1,27 +1,15 @@
-.post-modal{
-   display: flex;
-   border: 1px solid #ededed;
-  width: 100%;
-   height: 100%;
-   overflow: hidden;
-}
-.post-photo{
-    flex: 0.7;
-    border: 1px solid #ededed;
-    max-width: 100%;
-    max-height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-#outImage{
-    max-width: 80%;
-    max-height: 80%;
-    margin: 30px;
-    border-bottom: 1px solid #ededed;
 
+
+.post-modal-header{
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    width: 100vw;
+    background-color: white;
+    border: 1px solid #ededed;
 }
+
+
 #picField{
     display: none;
 
@@ -41,69 +29,23 @@
 .picFieldLabel:hover{
     background-color: #2e9be4;
 }
-.post-caption{
-    border: 1px solid #ededed;
-display: flex;
-flex-direction: column;
-align-items: center;
-
-    flex: .3;
-
-}
 
 #caption-input{
     border: 0px;
     min-width: 93%;
-    height: 50%;
     padding: 10px;
     font-size: 120%;
+    overflow-y: hidden;
+    min-height: 70px;
+    resize: none;
+}
 
-}
-.caption-button{
-    background-color: white;
-    border: none;
-    color: #9ccae9;
-    display: block;
-    margin: 10px;
-    font-size: 1.005rem;
-    border-radius: 5px;
-    padding: 7px;
-}
-.caption-button:hover{
-    background-color: rgb(245, 245, 245);
-
-    color: #6babd6;
-}
-.modal-closing-button{
-    z-index: 10000;
-    position: fixed;
-    top: 1%;
-    right: 5%;
-}
 @media only screen and (max-width: 600px) {
 
-.post-modal{
-    flex-direction: column;
-}
-.post-caption{
-    flex: .4;
-}
-.post-photo{
-    flex: .6;
-}
-#outImage{
-    max-width: 50%;
-    max-height: 40%;
-    margin: 30px;
-    border-bottom: 1px solid #ededed;
-
-}
 .picFieldLabel{
  height: 10px;
  font-size: .7rem;
 
 }
-#caption-input{
-width: 80%;
-}
+
 }

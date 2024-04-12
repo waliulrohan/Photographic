@@ -7,12 +7,12 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 const CardSkeletons = () => {
-const dummyArray =[0,0,0,0]
+const dummyArray =[0,0]
     return (
         <div>
                     {
             dummyArray.map((item,i)=>{
-   return     <div className='card-con'>
+   return     <div className='card-con' key={i}>
             <div className="card-header" style={{height:"30px",backgroundColor:"rgb(252, 252, 252)"}}> 
             <div id="skeletonDp" className="glow" ></div>           
               <p className="time-stamp glow" id='card-skeleton-text' style={{width:"20%",height:"10px"}} ></p>
@@ -58,7 +58,7 @@ const dummyArray =[0,0,0,0]
                 </div>
 
                 <input className='commentInput' id='commentInput' type="text" placeholder='Add a comment...' name='comment' />
-                <button >Post</button>
+                <button className='card-comment-no-post' >Post</button>
 
             </div>
 

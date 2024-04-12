@@ -110,8 +110,9 @@ async function myPosts(req,res) {
 
 // my following posts 
 async function myFollowingPosts(req,res) {
+    let skip = req.query.skip
     try{
-            const post = await  POST.find({postedBy: {$in:req.body.following}}).populate("comments.commenter" , "name photo").populate("postedBy", "_id name photo").sort("-createdAt");
+            const post = await  POST.find({postedBy: {$in:req.body.following}}).limit(10).skip(parseInt(skip)).populate("comments.commenter" , "name photo").populate("postedBy", "_id name photo").sort("-createdAt");
     res.status(200).json(post)
     }catch(err){
         return res.status(422).json({ error: "Can't find post." ,err})

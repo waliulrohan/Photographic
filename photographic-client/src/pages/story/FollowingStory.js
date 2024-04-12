@@ -3,7 +3,8 @@ import { Outlet } from 'react-router-dom';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import StorySlide from '../storySlide/StorySlide';
+import StorySlide from '../../components/storySlide/StorySlide';
+import StorySkeleton from '../../components/loadingSkeletons/StorySkeleton';
 const FollowingStory = () => {
 
 
@@ -20,7 +21,9 @@ const FollowingStory = () => {
     const [myData, setMyData] = useState({});
     const [ followingPosts , setFollowingPosts  ] = useState([])
     const [followingStory , setFollowingStory] = useState([])
-    
+    const [loading , setLoading] = useState(true)
+
+
 // setting myData
     useEffect(() => {
         if (myId && token) {
@@ -43,21 +46,6 @@ const FollowingStory = () => {
     useEffect(() => {
 
         if (token && myData.following) {
-            fetch("https://photographic-server.onrender.com/post/myFollowingPosts", {
-                method: "post",
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    following : myData.following,
-                }),
-            })
-                .then(res => res.json())
-                .then(data => {
-                    setFollowingPosts(data)
-                });
-
                 // following story
                 fetch("https://photographic-server.onrender.com/story/followingStory", {
                     method: "post",
@@ -72,6 +60,7 @@ const FollowingStory = () => {
                     .then(res => res.json())
                     .then(data => {
                         setFollowingStory(data)
+                        setLoading(false)
                     });
 
         }
@@ -104,35 +93,39 @@ const FollowingStory = () => {
       setIsSliderOpen(false);
     };
 
-  if (followingStory.length === 0) {
-    return(
-      <div className="no-story">
-      <p>Stories will appear here</p>
-    </div>
-    )
-  }  
-    return (
-        <div className="all-story-con">
-      {followingStory.map((story, index) => (
-        <div key={index} onClick={() => openSlider(index)}  className='story-display-con' >
-          <img className='story-photo' src={story.photo} alt="" />
-        </div>
-      ))}
-
-      {isSliderOpen && (
-        <div>
-          <div className='right-con-overlay' onClick={closeSlider}></div>
-          <div className='allStory-con-story'>
-            <Slider {...settings} initialSlide={currentSlide}>
-              {followingStory.map((story, index) => (
-                <StorySlide key={index} story={story} closeSlider={closeSlider}/>
-              ))}
-            </Slider>
-          </div>
-        </div>
-      )}
-        </div>
-    );
+    if(loading){
+      return <StorySkeleton/>
+    }else{
+            if (followingStory.length === 0) {
+              return(
+                <div className="no-story">
+                <p>Stories will appear here</p>
+              </div>
+              )
+            }  
+              return (
+                  <div className="all-story-con">
+                {followingStory.map((story, index) => (
+                  <div key={index} onClick={() => openSlider(index)}  className='story-display-con' >
+                    <img className='story-photo' src={story.photo} alt="" />
+                  </div>
+                ))}
+      
+                {isSliderOpen && (
+                  <div>
+                    <div className='right-con-overlay' onClick={closeSlider}></div>
+                    <div className='allStory-con-story'>
+                      <Slider {...settings} initialSlide={currentSlide}>
+                        {followingStory.map((story, index) => (
+                          <StorySlide key={index} story={story} closeSlider={closeSlider}/>
+                        ))}
+                      </Slider>
+                    </div>
+                  </div>
+                )}
+                  </div>
+              );
+    }
 };
 
 

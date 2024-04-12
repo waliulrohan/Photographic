@@ -1,4 +1,3 @@
-/* eslint-disable no-cond-assign */
 import React, { useContext, useEffect, useState } from 'react';
 
 // icons
@@ -10,27 +9,33 @@ import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ClearIcon from '@mui/icons-material/Clear';
 
+import './home.css'
 
 import { CreateModal } from '../../App';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import ImageView from '../../components/ImageView./ImageView';
+import Text from '../../shared/Text';
 
 
 const Card = ({ post }) => {
+    const {  followingPosts , setFollowingPosts , allPosts, setAllPosts  } = useContext(CreateModal);
 
 
 
     const [showComment, setShowComment] = useState(false)
     const [comment, setComment] = useState('')
-    const { allPosts, setAllPosts } = useContext(CreateModal);
-    const { _id, caption, postedBy, photo, likes, comments } = post;
+    const { _id, caption, postedBy, photo, likes, comments , createdAt } = post;
     const token = sessionStorage.getItem("token")
     const navigate = useNavigate();
+    const [ isZoom , setIsZoom] = useState(false)
+
+    const timeStirng = new Date(createdAt);
 
     // add comment
 
     const handleComment = () => {
-
+      setComment('')
         if (comment) {
             if (token) {
                 fetch("https://photographic-server.onrender.com/post/comment", {
@@ -46,8 +51,8 @@ const Card = ({ post }) => {
                 })
                     .then(res => res.json())
                     .then(data => {
-                        if(!showComment){
-                     toast.success("Comment posted.");
+                        if (!showComment) {
+                            toast.success("Comment posted.");
                         }
 
                         setComment("");
@@ -59,7 +64,17 @@ const Card = ({ post }) => {
                             }
                         })
                         setAllPosts(newData)
-                  
+
+                            // setting following Data
+                            const newFollowingData = followingPosts.map(post => {
+                                if (post._id === data._id) {
+                                    return data
+                                } else {
+                                    return post
+                                }
+                            })
+                            setFollowingPosts(newFollowingData)
+    
                     });
             }
         } else {
@@ -91,6 +106,16 @@ const Card = ({ post }) => {
                     });
                     setAllPosts(newData)
 
+                            // setting following Data
+                            const newFollowingData = followingPosts.map(post => {
+                                if (post._id === data._id) {
+                                    return data
+                                } else {
+                                    return post
+                                }
+                            })
+                            setFollowingPosts(newFollowingData)
+    
                 });
         }
 
@@ -121,34 +146,48 @@ const Card = ({ post }) => {
                         }
                     });
                     setAllPosts(newData)
+
+                            // setting following Data
+                            const newFollowingData = followingPosts.map(post => {
+                                if (post._id === data._id) {
+                                    return data
+                                } else {
+                                    return post
+                                }
+                            })
+                            setFollowingPosts(newFollowingData)
+    
                 });
         }
 
     }
-// always scroll to bottom in comments
-useEffect(()=>{
-    const messagesContainer = document.getElementById("all-comments");
-  if (messagesContainer) {
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    // always scroll to bottom in comments
+    useEffect(() => {
+        const messagesContainer = document.getElementById("all-comments");
+        if (messagesContainer) {
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
-  }
+        }
 
-},[comments])
+    }, [comments])
     return (
         <div className='card-con'>
             <div className="card-header">
-                <img
-                style={{cursor:'pointer'}}
-                 onClick={()=> navigate(`/otherProfile/${postedBy._id}`)}
+                <div className="card-frame">
+                    <img
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => navigate(`/otherProfile/${postedBy._id}`)}
                     src={postedBy.photo}
                     alt="........" className="card-dp" />
-                <p    style={{cursor:'pointer'}}  onClick={()=> navigate(`/otherProfile/${postedBy._id}`)} className="card-poster">{postedBy.name}</p>
+                </div>
+
+                <p style={{ cursor: 'pointer' }} onClick={() => navigate(`/otherProfile/${postedBy._id}`)} className="card-poster">{postedBy.name}</p>
             </div>
             <div className="card-main">
 
                 <div className="card-image">
-                    <img className='card-image-photo' src={photo} alt="loading...." />
-
+                    <img onClick={(()=> setIsZoom(true))} className='card-image-photo' src={photo} alt="loading...." />
+                    {isZoom && <ImageView url={photo} setIsZoom={setIsZoom} />}
                 </div>
 
                 <div className="card-react">
@@ -157,7 +196,7 @@ useEffect(()=>{
                             ?
                             <div className="unlike" id='unlike'>
                                 <IconButton onClick={() => handleUnlike()} >
-                                    <FavoriteIcon style={{ fill: '#0072ea', fontSize: 30 }} />
+                                    <FavoriteIcon style={{ fill: '#0072ea'}} />
                                 </IconButton>
                                 <p className="like-count">{likes.length}</p>
                             </div>
@@ -183,8 +222,8 @@ useEffect(()=>{
 
                 <div className="card-description">
 
-                    <p >{caption}</p>
-                    <p className="time-stamp">2 days ago</p>
+                <Text text={caption}></Text> 
+                    <p className="time-stamp">{timeStirng.toLocaleDateString()}-{timeStirng.toLocaleTimeString()}</p>
                 </div>
 
             </div>
@@ -194,88 +233,61 @@ useEffect(()=>{
                 </div>
 
                 <input value={comment} className='commentInput' id='commentInput' type="text" placeholder='Add a comment...' name='comment' onChange={(e) => setComment(e.target.value)} />
-                <button onClick={() => handleComment()}>Post</button>
-
+                { comment ?  <button className='card-comment-post' onClick={() => handleComment()}>Post</button>
+                            :
+                            <button className='card-comment-no-post'>Post</button>
+                 }
             </div>
 
 
             {
                 showComment &&
-                <div className="comment-modal">
+                <div className="">
                     <div className="close-modal">
                         <IconButton onClick={() => setShowComment(!showComment)} >
-                            <ClearIcon  style={{ fill: '#0072ea', fontSize: 40 }}  />
+                            <ClearIcon style={{ fill: '#0072ea', fontSize: 30 }} />
                         </IconButton>
                     </div>
                     <div className="c-modal-container">
-                        <div className="c-modal-photo">
-                            <img src={photo} alt="loading...." />
-                        </div>
                         <div className="c-modal-detail">
-                            <div className="card-header" style={{ borderBottom: "1px solid   #e7e7e7" }} >
-                                <img
-                                    src={postedBy.photo}
-                                    alt="........" className="card-dp" />
-                                <p className="card-poster">{postedBy.name}</p>
-                            </div>
                             <div className="all-comments" id="all-comments" style={{ borderBottom: "1px solid   #e7e7e7" }} >
                                 {
-                                    comments.map(com => { return(
-                                        <div className="comment-item">
-                                            <img
-                                                src={com.commenter.photo}
-                                                alt="........" className="card-dp" />
+                                    comments.map(com => {
+                                        return (
+                                            <div className="comment-item">
+                                                 <div className="card-frame">
+                                                    <img
+                                                    style={{ cursor: 'pointer' }}
+                                                    onClick={() => navigate(`/otherProfile/${com.commenter._id}`)}
+                                                    src={com.commenter.photo}
+                                                    alt="........" className="card-dp" />
+                                                </div>
 
-                                            <p><span className="commenter">{com.commenter.name}</span>  <span className="comment-text">{com.comment}</span></p>
-                                        </div>)
+                                                <div className="comment-frame">
+                                                     <p><span  onClick={() => navigate(`/otherProfile/${com.commenter._id}`)} className="commenter">{com.commenter.name}</span>  <span className="comment-text">{com.comment}</span></p>
+                                                </div>                                            </div>)
                                     })
                                 }
 
                             </div>
-<div className="c-modal-description">
-                                <div className="card-react" >
-                                {
-                                    likes.includes(sessionStorage.getItem("myId"))
-                                        ?
-                                        <div className="unlike" id='unlike'>
-                                            <IconButton onClick={() => handleUnlike()} >
-                                                <FavoriteIcon style={{ fill: '#0072ea', fontSize: 30 }} />
-                                            </IconButton>
-                                            <p className="like-count">{likes.length}</p>
-                                        </div>
-                                        :
-                                        <div className="like" id='like'>
-                                            <IconButton onClick={() => handleLike()} >
-                                                <FavoriteBorderIcon />
-                                            </IconButton>
-                                            <p className="like-count">{likes.length}</p>
-                                        </div>
-
-                                }
-
-
-
-                                <IconButton>
-                                    <SendOutlinedIcon />
-                                </IconButton>
-                            </div>
-                            <div className="card-description" style={{ borderBottom: "1px solid   #e7e7e7" }} >
-
-                                <p >{caption}</p>
-                                <p className="time-stamp">2 days ago</p>
-                            </div>
-
+                            <div className="c-modal-description">
                             <div className="card-comment" style={{ borderBottom: "1px solid   #e7e7e7" }} >
-                                <div className="smile-icon">
-                                    <SentimentSatisfiedAltIcon></SentimentSatisfiedAltIcon>
+
+                                    <input value={comment} className='commentInput' id='commentInput' type="text" placeholder='Add a comment...' name='comment' onChange={(e) => setComment(e.target.value)} />
+                                    { comment ?
+                                     <button className='card-comment-post' onClick={() => handleComment()}>Post</button>
+                                    :
+                                    <button className='card-comment-no-post'>Post</button>
+                                    }
+                                </div>
+                                <div className="card-description" style={{maxHeight:"30vh" , overflowX:'hidden' , overflowY:"scroll"}} >
+
+                                <Text text={caption}></Text> 
+                                    <p className="time-stamp">{timeStirng.toLocaleDateString()}-{timeStirng.toLocaleTimeString()}</p>
                                 </div>
 
-                                <input value={comment} className='commentInput' id='commentInput' type="text" placeholder='Add a comment...' name='comment' onChange={(e) => setComment(e.target.value)} />
-                                <button onClick={() =>{ 
-                                    handleComment()
-                                }}>Post</button>
+
                             </div>
-</div>
 
                         </div>
                     </div>

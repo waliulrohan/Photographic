@@ -11,13 +11,12 @@ const SignUp = () => {
     const [password,setPassword] = useState('');
 
 
-  const emailRegex = /([a-zA-Z0-9]+)([\.{1}])?([a-zA-Z0-9]+)\@gmail([\.])com/g
-  ;
+    const emailRegex = /.+@photographic$/;
 
     const handleSignUp = () =>{
         if (email && name && username && password ) {
           if (!emailRegex.test(email)) {
-            toast.error("Only support  @gmail.com")
+            toast.error("Use  @photographic ")
             return
           } 
 

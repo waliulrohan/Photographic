@@ -1,9 +1,10 @@
 .story-slide{
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-height: 100vh;
+    min-height: 100vh;
 
 }
 .slide-header{
@@ -44,4 +45,8 @@ max-height: 100vh;
 }
 .close-story-modal{
     margin-left: auto
+}
+
+@media only screen and (max-width: 600px) {
+
 }

@@ -3,33 +3,36 @@ import './home.css';
 import Sidebar from './Sidebar';
 import Card from './Card';
 import Right from './Right';
-import Navbar from '../navbar/Navbar';
+import Navbar from '../../components/navbar/Navbar';
 import { CreateModal } from '../../App';
-import CardSkeletons from '../loadingSkeletons/CardSkeletons';
+import CardSkeletons from '../../components/loadingSkeletons/CardSkeletons';
 import ClockLoader from 'react-spinners/ClockLoader'
 
 
 const Home = () => {
 
   // title
-document.title = "Photographic-Home"
+  document.title = "Photographic-Home"
 
   const { allPosts, setAllPosts } = useContext(CreateModal);
   const [allCardsDiv, setAllCardsDiv] = useState(null);
-  const [loading,setLoading] = useState(true)
-  const [allStory,setAllStory] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [allStory, setAllStory] = useState([])
   const token = sessionStorage.getItem("token")
   let skip = 0;
 
   const fetchPosts = () => {
     const token = sessionStorage.getItem('token');
+    console.log("setting  oooooooo function")
+
     if (token) {
       fetch(`https://photographic-server.onrender.com/post/allPosts?skip=${skip}`)
         .then(res => res.json())
-        .then(data =>{
+        .then(data => {
+          console.log(data)
           setLoading(false)
-           setAllPosts(prevData => [...prevData, ...data])
-          });
+          setAllPosts(prevData => [...prevData, ...data])
+        });
     }
   };
 
@@ -38,16 +41,14 @@ document.title = "Photographic-Home"
 
     const { clientHeight, scrollTop, scrollHeight } = allCardsDiv;
     if (clientHeight + scrollTop >= scrollHeight) {
-      console.log('scrolled to bottom');
+      setLoading(true)
       skip = skip + 10;
       fetchPosts();
     }
-    console.log('scrolled triggerd');
+
   };
 
   useEffect(() => {
-    console.log('scrolled triggerd');
-    setAllPosts([])
     setAllCardsDiv(document.getElementById('all-cards'));
   }, []);
 
@@ -55,7 +56,9 @@ document.title = "Photographic-Home"
     if (!allCardsDiv) return;
 
     allCardsDiv.addEventListener('scroll', handleScroll);
-    fetchPosts();
+    if(allPosts.length === 0){
+      fetchPosts();
+    }
 
     return () => {
       if (allCardsDiv) {
@@ -63,24 +66,26 @@ document.title = "Photographic-Home"
       }
     };
   }, [allCardsDiv]);
-// fetching Stories
-useEffect(()=>{
-  if(token){
-      fetch('https://photographic-server.onrender.com/story/allStory', {
-    headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-    },
-})
-    .then((res) => res.json())
-    .then((data) => {
-console.log(data);
-            setAllStory(data)
-    
-    })
-  }
 
-},[])
+
+
+  // fetching Stories
+  useEffect(() => {
+    if (token) {
+      fetch('https://photographic-server.onrender.com/story/allStory', {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setAllStory(data)
+
+        })
+    }
+
+  }, [])
 
 
   return (
@@ -88,11 +93,7 @@ console.log(data);
       <Navbar />
       <div className='home-con'>
         <Sidebar />
-        {loading?
-         <div id='all-cards' className='all-cards'>
-                 <CardSkeletons />
-        </div>
-        :
+
         <div id='all-cards' className='all-cards'>
           {allPosts ? (
             allPosts.map(post => <Card post={post} key={post._id} />)
@@ -100,22 +101,11 @@ console.log(data);
           ) : (
             'loading....'
           )}
-
-          <div className="clock-loader">
-                <ClockLoader
-                color="#0072ea"
-                size={50}
-                speedMultiplier={4}
-                />
-          </div>
-
-          <div className='invisible-space'>
-            <h1>space</h1>
-          </div>
+          {loading && <CardSkeletons />}
         </div>
-      }
 
-        <Right stories={allStory}/>
+
+        <Right stories={allStory} />
       </div>
     </div>
   );

@@ -19,6 +19,18 @@ background-color: #4141411c;
     width: 100%;
     background-color: #6b6b6b1c;
 }
+.login-loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-color: #6d76777d;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+}
 
 .glow{
     animation: glow 2s infinite alternate;

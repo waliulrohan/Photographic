@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import '../myProfile/myProfile.css'
 
 import { useParams } from 'react-router-dom';
-import PostDetail from '../postDetails/PostDetail';
-import Navbar from '../navbar/Navbar';
+import PostDetail from '../../components/postDetails/PostDetail';
+import Navbar from '../../components/navbar/Navbar';
 import Sidebar from '../home/Sidebar';
 import MyProfile from '../myProfile/MyProfile';
-import ProfileSkeleton from '../loadingSkeletons/ProfileSkeleton';
+import ProfileSkeleton from '../../components/loadingSkeletons/ProfileSkeleton';
+import { IconButton } from '@mui/material';
+import ClearIcon from '@mui/icons-material/Clear';
 
 const OtherProfile = () => {
 
@@ -142,10 +144,10 @@ useEffect(() => {
                     <div className="profile-gallery">
                         {myPosts.map((post) => (
                             <div key={post._id}>
-                                <img onClick={() => { setShowComment(true); setSinglePost(post) }} src={post.photo} alt="..." />
+                                <img  className="profile-gallery-img" onClick={() => { setShowComment(true); setSinglePost(post) }} src={post.photo} alt="..." />
                                 {
                                     showComment && (<div>
-                                        <PostDetail post={singlePost} setShowComment={setShowComment} showComment={showComment} />
+                                        <PostDetail myPosts={myPosts} setMyPosts={setMyPosts} post={singlePost} setShowComment={setShowComment} showComment={showComment} />
                                     </div>
 
                                     )

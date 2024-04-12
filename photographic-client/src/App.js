@@ -1,11 +1,11 @@
 import logo from './images/photographicLogo.png';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Authenticate from './components/authenticate/Authenticate';
-import SignUp from './components/authenticate/SignUp';
+import Authenticate from './pages/authenticate/Authenticate';
+import SignUp from './pages/authenticate/SignUp';
 
-import Login from './components/authenticate/Login';
-import Home from './components/home/Home';
+import Login from './pages/authenticate/Login';
+import Home from './pages/home/Home';
 import { createContext, useEffect, useState } from 'react';
 import ReactModal from 'react-modal';
 import PostModal from './components/createPostModal/PostModal';
@@ -13,12 +13,12 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { IconButton } from '@mui/material';
 import PrivateOutlet from './components/privateRoute/PrivateOutlet';
 import { Toaster } from 'react-hot-toast';
-import MyProfile from './components/myProfile/MyProfile';
-import OtherProfile from './components/otherProfile/OtherProfile';
-import MyFollowing from './components/home/MyFollowing';
-import Story from './components/story/Story';
-import FollowingStory from './components/story/FollowingStory';
-import AllStory from './components/story/AllStory';
+import MyProfile from './pages/myProfile/MyProfile';
+import OtherProfile from './pages/otherProfile/OtherProfile';
+import MyFollowing from './pages/home/MyFollowing';
+import Story from './pages/story/Story';
+import FollowingStory from './pages/story/FollowingStory';
+import AllStory from './pages/story/AllStory';
 import CreateStory from './components/createStory/CreateStory';
 import Search from './components/search/Search'
 import NotFound from './components/notFound/NotFound';
@@ -31,51 +31,16 @@ function App() {
   const [storyModal, setStoryModal] = useState(false)
   const [searchModal , setSearchModal] = useState(false)
   const [allPosts, setAllPosts] = useState([])
-
+  const [ followingPosts , setFollowingPosts  ] = useState([])
+  const [myData, setMyData] = useState({});
   const closeModal = () => {
     setModalIsOpen(false);
   };
 
   return (
-    <CreateModal.Provider value={{ modalIsOpen, setModalIsOpen, allPosts, setAllPosts, storyModal, setStoryModal ,searchModal , setSearchModal}}>
+    <CreateModal.Provider value={{myData, setMyData, modalIsOpen, setModalIsOpen, allPosts, setAllPosts, storyModal, setStoryModal ,searchModal , setSearchModal ,  followingPosts , setFollowingPosts }}>
       <div className="App">
         <div><Toaster /></div>
-     <ReactModal
-          style={{
-            overlay: {
-              zIndex: '5000',
-            },
-            content: {
-              padding: "0px",
-              height: '90%',
-            },
-          }}
-          isOpen={modalIsOpen}
-          onRequestClose={closeModal}
-        >
-          <PostModal />
-    </ReactModal>
-
-    <ReactModal
-          style={{
-            overlay: {
-              zIndex: '5000',
-            },
-            content: {
-              padding: "0px",
-              height: '90%',
-              maxHeight: "90%",
-            },
-          }}
-          isOpen={storyModal}
-          onRequestClose={()=>setStoryModal(false)}
-        >
-            <IconButton onClick={()=>setStoryModal(false)}>
-              <ArrowBackIcon />
-            </IconButton>
-          <CreateStory></CreateStory>
-    </ReactModal>
-
         <BrowserRouter>
 
         <ReactModal
@@ -93,7 +58,7 @@ function App() {
         >
           <Search />
     </ReactModal>
-
+  
           <Routes>
           <Route path='*' element={<NotFound />} />
             <Route path='/authenticate/*' element={<Authenticate></Authenticate>}>
@@ -117,6 +82,8 @@ function App() {
 
 
           </Routes>
+          <PostModal />
+          <CreateStory />
         </BrowserRouter>
 
       </div>

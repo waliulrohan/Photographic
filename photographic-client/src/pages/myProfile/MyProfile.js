@@ -2,23 +2,23 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import './myProfile.css'
 
 import Sidebar from '../home/Sidebar';
-import Navbar from '../navbar/Navbar';
+import Navbar from '../../components/navbar/Navbar';
 
 import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 // confirm dialogue
 
-import { confirmAlert } from 'react-confirm-alert'; // Import
-import './deletePost.css'; // Import css
+import { confirmAlert } from 'react-confirm-alert'; 
+import './deletePost.css'; 
 
 
 
-import PostDetail from '../postDetails/PostDetail';
+import PostDetail from '../../components/postDetails/PostDetail';
 import { IconButton } from '@mui/material';
 import { toast } from 'react-hot-toast';
-import ProfilePic from '../profilePicModal/ProfilePic';
-import ProfileSkeleton from '../loadingSkeletons/ProfileSkeleton';
+import ProfilePic from '../../components/profilePicModal/ProfilePic';
+import ProfileSkeleton from '../../components/loadingSkeletons/ProfileSkeleton';
 
 
 const MyProfile = () => {
@@ -34,47 +34,6 @@ document.title = "Photographic-My Profile"
     const token = sessionStorage.getItem("token")
     const [profilePicModal  , setProfilePicModal] = useState(false)
 
-    // delete confirm
-    const deleteConfirm = (postId) => {
-        confirmAlert({
-            title: 'Confirm to delete',
-            message: 'Are you sure to delete this post.',
-            buttons: [
-                {
-                    label: 'Yes',
-                    onClick: () => {
-                        // delete post 
-
-                            if (token) {
-                                fetch(`https://photographic-server.onrender.com/post/delete/${postId}`, {
-                                    method: "POST",
-                                    headers: {
-                                        'Authorization': `Bearer ${token}`,
-                                        "Content-Type": "application/json",
-                                    },
-                                })
-                                    .then(res => res.json())
-                                    .then(data => {
-
-                                        const newData = myPosts.filter(post => post._id !== data._id);
-                                        setMyPosts(newData)
-                                        setShowComment(false)
-                                        toast.success("post deleted")
-
-                                    });
-                            }
-
-
-
-                    }
-                },
-                {
-                    label: 'No',
-                    onClick: () => toast.error("You don't want to delete")
-                }
-            ]
-        });
-    };
 
 
     // logout confirm
@@ -89,6 +48,7 @@ document.title = "Photographic-My Profile"
                          sessionStorage.removeItem("token");
                          sessionStorage.removeItem("myDp");
                          sessionStorage.removeItem("myId");
+                         sessionStorage.removeItem("following")
                          window.location.reload();
                     }
                 },
@@ -181,17 +141,11 @@ document.title = "Photographic-My Profile"
                     <div className="profile-gallery">
                         {myPosts.map((post) => (
                             <div key={post._id}>
-                                <img onClick={() => { setShowComment(true); setSinglePost(post) }} src={post.photo} alt="..." />
+                                <img  className="profile-gallery-img"  onClick={() => { setShowComment(true); setSinglePost(post) }} src={post.photo} alt="..." />
                                 {
                                     showComment && (<div>
-                                        <PostDetail post={singlePost} setShowComment={setShowComment} showComment={showComment} />
-                                        <div className="delete-post">
-                                            <IconButton onClick={() => deleteConfirm(singlePost._id)}>
-                                                <DeleteForeverRoundedIcon style={{ fill: '#0072ea', fontSize: 25 }}></DeleteForeverRoundedIcon>
-                                            </IconButton>
+                                        <PostDetail deleteId={post._id} setMyPosts={setMyPosts} myPosts={myPosts} post={singlePost} setShowComment={setShowComment} showComment={showComment} />
 
-
-                                        </div>
                                     </div>
 
                                     )
@@ -199,9 +153,6 @@ document.title = "Photographic-My Profile"
                                 }
                             </div>
                         ))}
-                        <div className="invisible-space">
-                        <h1>space</h1>
-                    </div>
                     </div>
 
 

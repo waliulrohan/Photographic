@@ -1,10 +1,10 @@
 .home-con{
     display: flex;
- 
+    width: 100vw;
 }
 .home-main{
     max-height: 100vh;
-overflow: hidden;
+    overflow: hidden;
 }
 
 
@@ -83,6 +83,7 @@ overflow: hidden;
  display: flex;
  flex-direction: column;
  overflow-y: auto;
+ overflow-x: hidden;
  max-height: 100vh;
 }
 .card-con{
@@ -91,46 +92,62 @@ overflow: hidden;
     border-radius: 6px;
     margin: 25px 25px 10px 25px;
     max-width: 95%;
-    height: fit-content;
+    display: flex;
+    flex-direction: column;
 }
 .card-header{
     display: flex;
-    padding: 10px;
+    padding: 7px 15px;
+    height: 35px;
+    align-items: center;
+    justify-content: start;
+    gap: 20px;
+}
+.card-frame{
+    height: 35px;
+    width: 35px;
+    min-height: 35px;
+    min-width:35px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: rgba(77, 77, 77, 0.329);
 }
 .card-dp{
-
-    border-radius: 50%;
-    max-height: 45px;
-    max-width: 45px;
-    
-    margin-right: 10px;
-  
-
+    max-height: 100%;
+    max-width: 100%;
 }
 .card-poster{
   font-weight: 550;
 }
 
-
+.card-main{
+    height: 100%;
+    width: 100%;
+    flex: 1;
+}
 .card-image{
+    height:40vh;
     width: 100%;
+    background-color: #e7e7e788;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
-.card-image > img{
-    width: 100%;
-   
+.card-image-photo{
+    max-width: 100%;
+    max-height: 100%;
 }
-.card-image > iframe{
-    width: 100%;
-}
-
 
 .card-react{
     display: flex;
     padding: 0px 5px;
-}
-.like{
-margin: 3px;
+    height: fit-content;
+    justify-content: start;
+    align-items: center;
+    margin-bottom: 10px;
 }
 .like-count{
     font-size: .8rem;
@@ -148,8 +165,6 @@ margin: 3px;
     padding-right: 10px;
     padding-left: 5px;
     text-align: left;
-    border-bottom: 1.5px solid #e7e7e7;
-
 }
 .time-stamp{
     font-size: .8rem;
@@ -159,6 +174,7 @@ margin: 3px;
 .card-comment{
     display: flex;
     padding: 10px;
+    border-top: 1.5px solid #e7e7e7;
 
 }
 .smile-icon{
@@ -166,10 +182,10 @@ margin: 3px;
 }
 .card-comment > input{
     border: none;
-    width: 100%;
+    flex: 1;
 
 }
-.card-comment > button{
+.card-comment-post{
     background-color: white;
     border: none;
     color: #9ccae9;
@@ -178,10 +194,19 @@ margin: 3px;
     font-size: 1.005rem;
 
 }
-.card-comment > button:hover{
+.card-comment-post:hover{
     color: #4caae9;
     cursor: pointer;
 }
+.card-comment-no-post{
+    background-color: white;
+    border: none;
+    color: rgb(66, 66, 66);
+    display: block;
+    margin-left: 10px;
+    font-size: 1.005rem;
+}
+
 
 .comment-modal{
     position: fixed;
@@ -194,37 +219,20 @@ margin: 3px;
     display: flex;
 
     justify-content: center;
-    align-items: center;
+    align-items: start;
 }
 .c-modal-container{
-    position: inherit;
-    transform: translate(-50%, -50%);
-    display: flex;
-    width: 80%;
-    height: 80%;
+    height: calc(100vh - 40px);
+    bottom: 0;
+    position: fixed;
+    width: 100vw;
+    left: 0;
     background-color: white;
-    top: 50%;
-    left: 50%;
-    justify-content: center;
-    align-items: center;
-}
-.c-modal-photo{
-    flex: .5;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    z-index: 10;
 }
 
-.c-modal-photo img{
-    object-fit: contain;
-    max-width: 100%;
-    max-height: 100%;
-}
 .c-modal-detail{
-    flex: .5;
+    flex: 1;
     width: 100%;
     height: inherit;
     display: flex;
@@ -233,21 +241,29 @@ margin: 3px;
 }
 .all-comments{
 
-    height: 300px;
+    height: 100%;
     overflow-y:scroll ;
+    overflow-x: hidden;
 }
 .comment-item{
     display: flex;
     padding: 10px;
-    text-align: start;
-    gap: 3px;
+    gap: 5px;
 }
-.comment-item p {
-    margin-left: -12.5px;
+.comment-frame{
+    border-bottom: 1px solid #ededed;
+    padding-bottom: 15px;
+    max-width: 100%;
+    overflow-x: auto;
+}
+.comment-frame p{
+    margin: 0px 5px;
+    text-align: start;
 }
 .commenter{
     font-weight: 700;
     font-size: 1.1rem;
+    cursor: pointer;
 }
 .comment-text{
     font-weight: 500;
@@ -258,14 +274,22 @@ margin: 3px;
 .c-modal-description{
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; /* Align items at the bottom */
+    justify-content: flex-end;
 }
 .close-modal{
-    padding: 5px;
-    position: absolute;
-    top: 3%;
-    right: 5%;
-}
+    height: 40px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    left: 0;
+    background-color: rgba(134, 132, 132, 0.3);
+  }
+
+/* right con */
 
 .right-con{
     flex: .4;
@@ -306,7 +330,8 @@ margin: 3px;
   }
 
   .story-display-con{
-    max-height: 30vh;
+    max-height: 25vh;
+    min-height: 25vh;
     border:#e7e7e7 .2px solid ;
     display: flex;
     justify-content: center;
@@ -338,19 +363,19 @@ margin: 3px;
 .sidebar-con{
     display: none;
 }
-
+.home-main{
+    display: flex;
+    align-items: end;
+    min-height: 100vh;
+}
+.home-con{
+    max-height: calc(100vh - 63px);
+}
 .all-cards{
     flex: .6;
-    margin-top: 50px;
 }
 .right-con{
    flex: .4;
-   margin-top: 50px;
-}
-.close-modal{
-
-    top: 0;
-    right: 0;
 }
 .invisible-space{
     display: block;
@@ -366,20 +391,9 @@ margin: 3px;
       
     }
     .all-cards{
-   margin-top: 60px;
    flex: 1;
     }
-    .c-modal-photo{
-       display: none;
-    }
-    .c-modal-detail{
-        flex: 1;
-    }
-    .close-modal{
 
-        top: 0;
-        right: 0;
-    }
     .card-con{
         margin: 0px 0px 10px 0px;
         border-radius: 0;
@@ -388,6 +402,7 @@ margin: 3px;
         max-width: 100%;
         height: fit-content;
     }
+
 
 }
     

@@ -107,12 +107,14 @@ const Navbar = () => {
 
 
               <div className="profile-btn" onClick={() => navigate('/profile')}>
-                <div className="profile-btn-image">
-                  <img src={myDp} alt="...." />
-                </div>
+                <div className="card-frame">
+                          <img
+                          src={myDp}
+                          alt="........" className="card-dp" />
+                      </div>
 
-                <p>Profile</p>
-              </div>
+                      <p>Profile</p>
+                  </div>
             </div>
           </div>
         </div>

@@ -3,7 +3,8 @@ import { Outlet } from 'react-router-dom';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import StorySlide from '../storySlide/StorySlide';
+import StorySlide from '../../components/storySlide/StorySlide';
+import StorySkeleton from '../../components/loadingSkeletons/StorySkeleton';
 
 const AllStory = () => {
 
@@ -11,6 +12,7 @@ const AllStory = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [isSliderOpen, setIsSliderOpen] = useState(false);
     const [allStory,setAllStory] = useState([])
+    const [loading , setLoading] = useState(true)
     const token = sessionStorage.getItem("token")
   
     const settings = {
@@ -37,6 +39,7 @@ useEffect(()=>{
     .then((data) => {
 console.log(data);
             setAllStory(data)
+            setLoading(false)
     
     })
   }
@@ -53,37 +56,40 @@ console.log(data);
     const closeSlider = () => {
       setIsSliderOpen(false);
     };
-
-    if (allStory.length === 0) {
-      return(
-        <div className="no-story">
-        <p>Stories will appear here</p>
-      </div>
-      )
-    } 
-
-    return (
-        <div className="all-story-con">
-      {allStory.map((story, index) => (
-        <div key={index} onClick={() => openSlider(index)} className='story-display-con'>
-          <img className='story-photo' src={story.photo} alt="" />
+    if(loading){
+      return <StorySkeleton/>
+    }else{
+      if (allStory.length === 0) {
+        return(
+          <div className="no-story">
+          <p>Stories will appear here</p>
         </div>
-      ))}
+        )
+      } 
 
-      {isSliderOpen && (
-        <div>
-          <div className='right-con-overlay' onClick={closeSlider}></div>
-          <div className='allStory-con-story'>
-            <Slider {...settings} initialSlide={currentSlide}>
-              {allStory.map((story, index) => (
-                <StorySlide key={index} story={story} closeSlider={closeSlider}/>
-              ))}
-            </Slider>
+      return (
+          <div className="all-story-con">
+        {allStory.map((story, index) => (
+          <div key={index} onClick={() => openSlider(index)} className='story-display-con'>
+            <img className='story-photo' src={story.photo} alt="" />
           </div>
-        </div>
-      )}
-        </div>
-    );
+        ))}
+
+        {isSliderOpen && (
+          <div>
+            <div className='right-con-overlay' onClick={closeSlider}></div>
+            <div className='allStory-con-story'>
+              <Slider {...settings} initialSlide={currentSlide}>
+                {allStory.map((story, index) => (
+                  <StorySlide key={index} story={story} closeSlider={closeSlider}/>
+                ))}
+              </Slider>
+            </div>
+          </div>
+        )}
+          </div>
+      );
+    }
 };
 
 export default AllStory;

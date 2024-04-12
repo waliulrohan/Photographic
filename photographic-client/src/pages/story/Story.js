@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Right from '../home/Right';
 import { Outlet, useNavigate } from 'react-router-dom';
-import Navbar from '../navbar/Navbar';
+
 
 import './story.css'
+import Navbar from '../../components/navbar/Navbar';
 const Story = () => {
     // title
 document.title = "Photographic-Story"

@@ -2,13 +2,17 @@ import React, { useState } from 'react';
 import logo from '../../images/photographicLogo.png';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import LoginLoading from '../../components/loadingSkeletons/LoginLoading'
 
 const Login = () => {
     const navigate = useNavigate()
     const [password,setPassword] = useState('');
     const [email,setEmail] = useState('');
+    const [loading , setLoading] = useState(false)
     const handleLogin = () =>{
+
         if (email && password ) {
+            setLoading(true)
             fetch('https://photographic-server.onrender.com/auth/login',{
                 method: 'POST',
                 headers: {
@@ -20,6 +24,7 @@ const Login = () => {
                   password,
                 })
               }).then(res => res.json() ).then(data =>{
+                setLoading(false)
                 if (data.error) {
                     toast.error(data.error)
                 }else{
@@ -44,7 +49,7 @@ const Login = () => {
             <input  onChange={(e)=> setPassword(e.target.value)}  type="password" className="input-field" placeholder='password' name='password' required/>
 
             <input onClick={()=> handleLogin()} type="submit" value="Log In" class="login-button"/>
-
+           {loading && <LoginLoading />}
         </div>
     );
 };

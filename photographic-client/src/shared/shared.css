@@ -1,0 +1,20 @@
+.content-css{
+    width: 100%;
+    padding: 5px 10px;
+    white-space: pre-wrap;
+}
+.loading{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+}
+.loading p{
+    height: fit-content;
+    background-color: #adc4ec;
+    padding: 14px 20px;
+}
